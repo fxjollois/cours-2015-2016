@@ -1,9 +1,11 @@
 ---
 title: "Interrogation de données avec SAS"
 author: "FX Jollois"
+---
+
 date: "... ou comment faire du SQL sans SQL dans SAS"
 output: ioslides_presentation
----
+
 
 ## Introduction
 
