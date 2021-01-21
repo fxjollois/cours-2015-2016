@@ -1,7 +1,8 @@
 ---
 title: Interrogation de données
-date: du NoSQL avec MongoDB
 ---
+
+du NoSQL avec MongoDB
 
 ## Plan 
 
