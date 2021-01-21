@@ -1,7 +1,8 @@
 ---
 title: Librairie D3.js
-date: Data-Driven Documents
 ---
+
+date: Data-Driven Documents
 
 
 ## Introduction à son utilisation

@@ -1,8 +1,9 @@
 ---
 title: Informatique décisionnelle
 author: Introduction
-date: DUT STID 2ème année
 ---
+
+date: DUT STID 2ème année
 
 ## A noter
 
