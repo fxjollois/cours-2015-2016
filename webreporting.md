@@ -4,25 +4,25 @@ title: Web Reporting
 
 ## Slides de cours 
 
-- [Introduction au Web Reporting](slides/webreporting-intro.html)
-- [Introduction à la programmation web statique](slides/webreporting-html-css-svg.html)
-- [Introduction à la programmation web dynamique](slides/webreporting-javascript.html)
-- [Introduction à Google Charts](slides/webreporting-google-charts.html)
-- [Introduction à D3.js](slides/webreporting-d3.html)
-	- [Compléments](visualisation-donnees-d3.html)
-- [Introduction à Leaflet](slides/webreporting-leaflet.html)
+- [Introduction au Web Reporting](webreporting-intro)
+- [Introduction à la programmation web statique](webreporting-html-css-svg)
+- [Introduction à la programmation web dynamique](webreporting-javascript)
+- [Introduction à Google Charts](webreporting-google-charts)
+- [Introduction à D3.js](webreporting-d3)
+	- [Compléments](visualisation-donnees-d3)
+- [Introduction à Leaflet](webreporting-leaflet)
 
 ## Sujets TP
 
 - Première utilisation HTML, CSS et JS
-    - [Initiation](webreporting-tp-init.html)
+    - [Initiation](webreporting-tp-init)
 - Librairie [Google Charts](https://developers.google.com/chart/)
-    - [Initiation](webreporting-tp-google-charts.html) 
+    - [Initiation](webreporting-tp-google-charts) 
 - Librairie [D3.js](http://www.d3js.org)
-    - [Initiation](webreporting-tp-d3-init.html)
-    - [Compléments](webreporting-tp-d3-comp.html)
+    - [Initiation](webreporting-tp-d3-init)
+    - [Compléments](webreporting-tp-d3-comp)
 - Librairie autre :
-    - [Cartographie avec Leaflet](webreporting-tp-leaflet.html)
+    - [Cartographie avec Leaflet](webreporting-tp-leaflet)
 
 ## Projet
 
