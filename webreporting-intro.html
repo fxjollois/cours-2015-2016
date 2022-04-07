@@ -1,0 +1,426 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Web-Reporting</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Web-Reporting</h1>
+
+</div>
+
+
+<div id="introduction-à-la-data-visualisation-interactive" class="section level2">
+<h2>Introduction à la data visualisation interactive</h2>
+<ol style="list-style-type: decimal">
+<li>Qu’est-ce que le web-reporting ?</li>
+<li>Pourquoi la visualisation ?</li>
+<li>Pourquoi le web ?</li>
+<li>Comment ?</li>
+</ol>
+</div>
+<div id="le-web-reporting" class="section level2">
+<h2>Le web-reporting ?</h2>
+<div id="reporting" class="section level3">
+<h3>Reporting</h3>
+<p>Rapport (plus ou moins court) rendant compte de l’activité d’une entreprise. Il intègre à la fois des éléments numériques et des éléments graphiques :</p>
+<ul>
+<li><strong>Statistiques</strong></li>
+<li>Calcul de <strong>KPI</strong> et création d’indicateurs</li>
+<li><strong>Visualisation de données</strong></li>
+</ul>
+</div>
+<div id="web-reporting" class="section level3">
+<h3>Web-Reporting</h3>
+<p>Idem mais accessible via une page web, avec idéalement de l’interactivité et une mise à jour automatisé (sinon, un PDF suffit amplement)</p>
+</div>
+</div>
+<div id="le-web-reporting-1" class="section level2">
+<h2>Le web-reporting ?</h2>
+<div id="pour-qui" class="section level3">
+<h3>Pour qui ?</h3>
+<p>Très généralement adressé à des décideurs (directeur de service, d’agence, DG, …) qui vont s’appuyer dessus pour orienter à plus ou moins long terme l’avenir de leur service/agence/direction/entreprise/…</p>
+</div>
+<div id="importance-du-reporting" class="section level3">
+<h3>Importance du reporting</h3>
+<p>A l’heure actuelle (masse de données, besoin de réactivité, …), il est primordial que les décideurs puissent avoir les informations les plus lisibles, les plus à jour et les plus fiables.</p>
+</div>
+</div>
+<div id="le-web-reporting-2" class="section level2">
+<h2>Le web-reporting ?</h2>
+<div id="place-dans-le-schéma-info" class="section level3">
+<h3>Place dans le schéma info</h3>
+<ul>
+<li>Place légitime : en sortie d’un entrepôt de données (ou magasin de données), pour la restitution d’information</li>
+<li>Sinon : possiblement sur des données opérationnelles pour des reporting d’activités très focalisées</li>
+</ul>
+</div>
+<div id="contraintes" class="section level3">
+<h3>Contraintes</h3>
+<ul>
+<li>Données souvent agrégées, venant de plusieurs tables (si données sources) et donc pouvant prendre du temps à être consolidées si pas d’entrepôts</li>
+<li>Réactivité</li>
+<li>Interactivité : le destinataire doit pouvoir <em>jouer</em> avec la représentation pour faire sa propre analyse</li>
+</ul>
+</div>
+</div>
+<div id="le-web-reporting-3" class="section level2">
+<h2>Le web-reporting ?</h2>
+<iframe src="../webreporting/exemple-reporting.html" style="width:800px; height: 500px; border: 0;">
+</iframe>
+<p>Source : <a href="https://developers.google.com/chart/interactive/docs/gallery/controls" class="uri">https://developers.google.com/chart/interactive/docs/gallery/controls</a></p>
+</div>
+<div id="pourquoi-la-visualisation" class="section level2">
+<h2>Pourquoi la visualisation ?</h2>
+<div id="visualisation-de-données" class="section level3">
+<h3>Visualisation de données</h3>
+<p>Représentation graphique de données plus ou moins complexe, permettant la mise en valeur de tendances ou points importants. Élément de plus en plus utilisé en data-journalisme d’abord, puis dans les entreprise</p>
+</div>
+<div id="historique" class="section level3">
+<h3>Historique</h3>
+<p>Usage connu depuis plusieurs siècles (cf exemple dans la <a href="https://fr.wikipedia.org/wiki/Repr%C3%A9sentation_graphique_de_donn%C3%A9es_statistiques">page wikipedia</a> sur le sujet).</p>
+<p>On parle maintenant de <strong>dataviz</strong></p>
+</div>
+</div>
+<div id="pourquoi-le-web" class="section level2">
+<h2>Pourquoi le web ?</h2>
+<p>Tendance très forte dans le domaine de la dataviz, le passage au web est dû à plusieurs facteurs</p>
+<div id="aucune-réelle-contrainte-logicielle" class="section level3">
+<h3>Aucune réelle contrainte logicielle</h3>
+<p>Tout ordinateur à l’heure actuelle est équipé gratuitement d’un navigateur. Toutefois, les outils utilisés fonctionnent très souvent sur les derniers générations de navigateurs.</p>
+</div>
+<div id="interactivité" class="section level3">
+<h3>Interactivité</h3>
+<p>Au contraire de documents PDF classiques, une page web permet d’intégrer des éléments d’interactivité pour permettre à l’utilisateur d’analyser finement les données à disposition, plutôt que d’avoir un reporting qui contient tous les croisements possibles et inimaginables.</p>
+</div>
+</div>
+<div id="comment" class="section level2">
+<h2>Comment ?</h2>
+<div id="utilisation-des-technologies-web" class="section level3">
+<h3>Utilisation des technologies web</h3>
+<p><strong>HTML</strong> et <strong>CSS</strong> bien évidemment, mais surtout <strong>SVG</strong> ou <strong>Canvas</strong> pour les aspects graphiques, et <strong>JavaScript</strong> pour l’importation des données, la création des graphiques, la manipulation de la page et la gestion des événements.</p>
+</div>
+<div id="tout-à-la-main" class="section level3">
+<h3>Tout à la main ?</h3>
+<p>Non bien évidemment, car beaucoup trop lourd. Nous utilisons des <strong>librairies JS</strong>, dont les plus connus sont les suivantes : - <a href="https://developers.google.com/chart/">Google Charts</a> - <a href="http://www.highcharts.com/">Highcharts</a> - <a href="http://raphaeljs.com/">Raphaeljs</a> - <a href="http://d3js.org/">D3.js</a></p>
+</div>
+</div>
+<div id="objectifs-du-cours" class="section level2">
+<h2>Objectifs du cours</h2>
+<div id="connaître-la-programmation-web-statique" class="section level3">
+<h3>1. Connaître la programmation web statique</h3>
+</div>
+<div id="connaître-la-programmation-web-dynamique" class="section level3">
+<h3>2. Connaître la programmation web dynamique</h3>
+</div>
+<div id="connaître-la-librairie-d3.js" class="section level3">
+<h3>3. Connaître la librairie D3.js</h3>
+</div>
+<div id="comprendre-les-contraintes-de-la-réalisation-dun-tableau-de-bord-dynamique" class="section level3">
+<h3>4. Comprendre les contraintes de la réalisation d’un tableau de bord dynamique</h3>
+</div>
+<div id="mettre-en-oeuvre-les-acquis" class="section level3">
+<h3>5. Mettre en oeuvre les acquis</h3>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

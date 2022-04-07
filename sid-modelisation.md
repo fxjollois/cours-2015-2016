@@ -1,9 +1,8 @@
 ---
 title: Informatique Décisionnelle
 author: Modélisation
----
-
 date: DUT STID 2ème année
+---
 
 
 ## Plan du cours

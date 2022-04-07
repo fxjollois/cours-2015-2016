@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Librairie D3.js</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Librairie D3.js</h1>
+<h4 class="date">Data-Driven Documents</h4>
+
+</div>
+
+
+<div id="introduction-à-son-utilisation" class="section level2">
+<h2>Introduction à son utilisation</h2>
+<p><a href="http://www.d3js.org">Lien</a> vers la librairie</p>
+<ul>
+<li>Librairie très complète avec beaucoup d’exemples à disposition</li>
+<li>Personnalisation totale possible</li>
+<li>Accès à des primitives <code>SVG</code> permettant toute innovation</li>
+<li>Peu accessible directement et assez technique</li>
+</ul>
+<p><a href="../webreporting/exemple-d3.html">Exemple</a></p>
+</div>
+<div id="fonctionnement-typique" class="section level2">
+<h2>Fonctionnement typique</h2>
+<p>Idée principale :</p>
+<ul>
+<li>Lier les données au DOM</li>
+<li>Appliquer des transformations, baées sur les données, au document</li>
+</ul>
+<p>Plusieurs concepts à comprendre :</p>
+<ul>
+<li>Base : sélection, modification, ajout et insertion d’éléments</li>
+<li>Ajout de données au DOM</li>
+<li>Propriété dynamique, et Transformation</li>
+<li>Chaînage des fonctions</li>
+</ul>
+</div>
+<div id="base-sélection-et-modification" class="section level2">
+<h2>Base : sélection et modification</h2>
+<ul>
+<li>Deux fonctions de sélection respectivement d’un élément (<code>select()</code>) et de l’ensemble des éléments (<code>selectAll()</code>) correspondant à la définition passée en paramètre (sélecteur idem que pour le CSS) :</li>
+</ul>
+<pre class="js"><code>d3.select(&quot;selecteur&quot;);
+d3.selectAll(&quot;selecteur&quot;);</code></pre>
+<ul>
+<li>Une fonction (<code>size()</code>) permettant de connaître la taille de la sélection</li>
+<li>Une fonction (<code>empty()</code>) permettant de savoir si la sélection est vide</li>
+</ul>
+</div>
+<div id="base-modification-ajout-et-insertion-déléments" class="section level2">
+<h2>Base : modification, ajout et insertion d’éléments</h2>
+<ul>
+<li>Plusieurs fonctions pour modifier les éléments sélectionnés (par exemple <code>style()</code> ou <code>html()</code>). Le code suivant permet de mettre le texte en rouge pour tout le corps de la page</li>
+</ul>
+<pre class="js"><code>var corps = d3.select(&quot;body&quot;);
+corps.style(&quot;color&quot;, &quot;red&quot;);</code></pre>
+<ul>
+<li>Deux fonctions pour respectivement insérer un élément HTML fils à la fin (<code>append()</code>) ou au début (<code>insert()</code>) d’un élément père, qui s’utilisent comme suit :</li>
+</ul>
+<pre class="js"><code>selection.append(&quot;balise&quot;);
+selection.insert(&quot;balise&quot;);</code></pre>
+</div>
+<div id="exemple-sur-la-base-de-d3.js" class="section level2">
+<h2>Exemple : sur la base de d3.js</h2>
+<p data-height="268" data-theme-id="0" data-slug-hash="bVMMjZ" data-default-tab="result" data-user="fxjollois" class="codepen">
+See the Pen <a href='http://codepen.io/fxjollois/pen/bVMMjZ/'>d3.js : base de la librairie</a> by FX Jollois (<a href='http://codepen.io/fxjollois'><span class="citation">@fxjollois</span></a>) on <a href='http://codepen.io'>CodePen</a>.
+</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</div>
+<div id="ajout-de-données-au-dom" class="section level2">
+<h2>Ajout de données au DOM</h2>
+<ul>
+<li>Avec la fonction <code>data()</code> sur une sélection, il est possible de lier les données passées en paramètres (ce doit être un tableau) au DOM à la sélection en question. Le code suivant affecte chaque élément du tableau à chaque élément renvoyé par le sélecteur précédent</li>
+</ul>
+<pre class="js"><code>var selection = d3.selectAll(&quot;selecteur&quot;);
+selection.data(tableau);</code></pre>
+<ul>
+<li>S’il y a différence entre la taille de la sélection et la taille du tableau passé en paramètre de <code>data()</code>, il existe deux fonctions utiles
+<ul>
+<li><code>enter()</code> : pour gérer les éléments du tableau en plus</li>
+<li><code>exit()</code> : pour gérer les éléments de la sélection en plus</li>
+</ul></li>
+</ul>
+</div>
+<div id="propriété-dynamique" class="section level2">
+<h2>Propriété dynamique</h2>
+<ul>
+<li>Sur chaque sélection, on peut appliquer des modifications de style ou de contenu (voire autre), en fonction des données sont liées au DOM</li>
+<li>Utilisation d’une fonction anonyme, dont les paramètres peuvent être, dans cet ordre :
+<ul>
+<li>la valeur de l’élément du tableau affectée à l’élément</li>
+<li>la position de la valeur dans le tableau</li>
+<li>il est possible de n’utiliser que la valeur, voire aucun paramètre si besoin</li>
+</ul></li>
+</ul>
+<pre class="js"><code>var selection = d3.selectAll(&quot;selecteur&quot;);
+selection.data(tableau);
+selection.html(function(d, i) {
+    return &quot;position = &quot; + i + &quot;, valeur = &quot; + d;
+})</code></pre>
+</div>
+<div id="exemple-ajout-de-données-propriété-dynamique" class="section level2">
+<h2>Exemple : ajout de données + propriété dynamique</h2>
+<p data-height="268" data-theme-id="0" data-slug-hash="eprrjJ" data-default-tab="result" data-user="fxjollois" class="codepen">
+See the Pen <a href='http://codepen.io/fxjollois/pen/eprrjJ/'>d3.js</a> by FX Jollois (<a href='http://codepen.io/fxjollois'><span class="citation">@fxjollois</span></a>) on <a href='http://codepen.io'>CodePen</a>.
+</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</div>
+<div id="exemple-fonction-enter" class="section level2">
+<h2>Exemple : fonction <code>enter()</code></h2>
+<p data-height="268" data-theme-id="0" data-slug-hash="wKjjXN" data-default-tab="result" data-user="fxjollois" class="codepen">
+See the Pen <a href='http://codepen.io/fxjollois/pen/wKjjXN/'>d3.js</a> by FX Jollois (<a href='http://codepen.io/fxjollois'><span class="citation">@fxjollois</span></a>) on <a href='http://codepen.io'>CodePen</a>.
+</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</div>
+<div id="exemple-fonction-exit" class="section level2">
+<h2>Exemple : fonction <code>exit()</code></h2>
+<p data-height="268" data-theme-id="0" data-slug-hash="LpmmmL" data-default-tab="result" data-user="fxjollois" class="codepen">
+See the Pen <a href='http://codepen.io/fxjollois/pen/LpmmmL/'>d3.js</a> by FX Jollois (<a href='http://codepen.io/fxjollois'><span class="citation">@fxjollois</span></a>) on <a href='http://codepen.io'>CodePen</a>.
+</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</div>
+<div id="chaînage-des-fonctions" class="section level2">
+<h2>Chaînage des fonctions</h2>
+<ul>
+<li>Principe généralement appliqué en JS orienté objet : <strong>toute fonction d’un objet renvoie cet objet</strong>
+<ul>
+<li>sauf si la fonction a pour but de renvoyer un résultat spécifique</li>
+<li>donc concerne plutôt les procédures (qui sont des fonctions en JS)</li>
+</ul></li>
+<li>Corollaire : il est possible d’enchaîner un grand nombre de fonctions directement</li>
+</ul>
+<p data-height="268" data-theme-id="0" data-slug-hash="MaGGxK" data-default-tab="result" data-user="fxjollois" class="codepen">
+See the Pen <a href='http://codepen.io/fxjollois/pen/MaGGxK/'>d3.js</a> by FX Jollois (<a href='http://codepen.io/fxjollois'><span class="citation">@fxjollois</span></a>) on <a href='http://codepen.io'>CodePen</a>.
+</p>
+<script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

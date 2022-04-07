@@ -1,0 +1,681 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Modélisation" />
+
+
+<title>Informatique Décisionnelle</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Informatique Décisionnelle</h1>
+<h4 class="author">Modélisation</h4>
+<h4 class="date">DUT STID 2ème année</h4>
+
+</div>
+
+
+<div id="plan-du-cours" class="section level2">
+<h2>Plan du cours</h2>
+<ul>
+<li>Contraintes
+<ul>
+<li>Pourquoi dénormaliser ?</li>
+<li>Optimisation du temps</li>
+<li>Lisibilité du modèle</li>
+<li>Axes de qualification</li>
+</ul></li>
+<li>Démarche
+<ul>
+<li>Dénormalisation</li>
+<li>Modélisation dimensionnelle</li>
+<li>Étapes de la modélisation</li>
+<li>Différents modèles</li>
+</ul></li>
+<li>Atouts et faiblesses</li>
+</ul>
+</div>
+<div id="pourquoi-dénormaliser" class="section level2">
+<h2>Pourquoi dénormaliser ?</h2>
+<ul>
+<li>Contexte décisionnel
+<ul>
+<li>Mise à jour par des systèmes de productions</li>
+<li>Pas de maj en ligne</li>
+<li>Intégrité de l’entrepôt jamais remis en cause</li>
+<li>Nécessité de faire des requêtes complexes avec un temps de réponse relativement court</li>
+</ul></li>
+<li>Solution
+<ul>
+<li>Possibilité d’introduire de la redondance</li>
+<li>Dénormalisation des tables</li>
+</ul></li>
+</ul>
+</div>
+<div id="optimisation-du-temps" class="section level2">
+<h2>Optimisation du temps</h2>
+<ul>
+<li>Contexte décisionnel
+<ul>
+<li>Requêtes sur des grands ensembles</li>
+<li>Utilisation fréquente d’agrégats, de regroupements, de calculs, …</li>
+<li>Temps de réponse plus important qu’en transactionnel Solution</li>
+</ul></li>
+<li>Solution
+<ul>
+<li>Limitation du nombre de tables</li>
+<li>Optimisation des requêtes fréquentes via des index, du partitionnement, …</li>
+</ul></li>
+</ul>
+</div>
+<div id="lisibilité-du-modèle" class="section level2">
+<h2>Lisibilité du modèle</h2>
+<ul>
+<li>Contexte décisionnel
+<ul>
+<li>Lien entre éléments non corrélés</li>
+<li>Requêtes complexes</li>
+<li>Utilisation par un non-informaticien</li>
+<li>Volonté de réactivité importante du système</li>
+</ul></li>
+<li>Solution
+<ul>
+<li>Nécessité d’avoir un modèle lisible et intuitif</li>
+<li>Modèle des données évolutif</li>
+</ul></li>
+</ul>
+</div>
+<div id="axes-de-qualification" class="section level2">
+<h2>Axes de qualification</h2>
+<ul>
+<li>Axes de qualification d’un modèle décisionnel
+<ul>
+<li>Lisibilité</li>
+<li>Performances en terme de chargement</li>
+<li>Performances en terme d’exécution</li>
+<li>Administration</li>
+<li>Évolutivité</li>
+</ul></li>
+<li>Axes antagonistes
+<ul>
+<li>Exécution rapide → Redondances, agrégations, calcul <br>→ Chargement long &amp; Administration complexe</li>
+</ul></li>
+<li>Associer un poids à chaque axe</li>
+<li>Trouver le bon équilibre</li>
+</ul>
+</div>
+<div id="dénormalisation" class="section level2">
+<h2>Dénormalisation</h2>
+<ul>
+<li>Pas de technique formelle</li>
+<li>Approche pragmatique nécessaire</li>
+<li>Analyse précise des besoins des utilisateurs</li>
+<li>Définition des sujets d’intérêt majeur</li>
+<li>Quelques points important :
+<ul>
+<li>Une table → un sujet d’intérêt</li>
+<li>Moins de tables → moins de jointures</li>
+<li>Tables plus volumineuses</li>
+<li>Requêtes plus simples</li>
+</ul></li>
+</ul>
+</div>
+<div id="modélisation-dimensionnelle" class="section level2">
+<h2>Modélisation dimensionnelle</h2>
+<ul>
+<li>Analyse de la performance</li>
+<li>Utilisation d’un ensemble d’indicateurs (ou <strong>Faits</strong>)
+<ul>
+<li>Taux d’occupation des lits dans un hôpital</li>
+<li>Nombre de produits en stock</li>
+<li>Montant d’un achat</li>
+<li>…</li>
+</ul></li>
+<li>Indicateurs analysés en terme de <strong>Dimensions</strong> (axe d’analyse)
+<ul>
+<li>Temps, Localisation, Clients, Service, …</li>
+</ul></li>
+<li>Table de faits regroupant les indicateurs ayant le même ensemble de dimensions</li>
+</ul>
+</div>
+<div id="etapes-de-la-modélisation" class="section level2">
+<h2>Etapes de la modélisation</h2>
+<ol style="list-style-type: decimal">
+<li>Choix du processus à modéliser</li>
+</ol>
+<ul>
+<li>Activité de l’organisation et écoute des utilisateurs</li>
+<li>Pas attaché à un service ou à une fonction</li>
+</ul>
+<ol start="2" style="list-style-type: decimal">
+<li>Définition de la granularité du processus</li>
+</ol>
+<ul>
+<li>Niveau de détails des mesures d’une ligne de la table de faits</li>
+<li>Étape critique et obligatoire</li>
+</ul>
+<ol start="3" style="list-style-type: decimal">
+<li>Choix des dimensions</li>
+</ol>
+<ul>
+<li>Caractéristiques de la table des faits</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
+<li>Identification des faits</li>
+</ol>
+<ul>
+<li>Mesures à mettre dans la table de faits</li>
+<li>Au niveau de granularité de l’étape 2</li>
+</ul>
+</div>
+<div id="sélection-du-processus" class="section level2">
+<h2>Sélection du processus</h2>
+<ul>
+<li>Première étape de la conception : choix du processus à modéliser</li>
+<li>Choix du modèle avec la plus forte incidence
+<ul>
+<li>Répondre aux questions les plus pressantes des utilisateurs</li>
+<li>Données faciles à extraire</li>
+</ul></li>
+<li>Affinement et extension du modèle par étape
+<ul>
+<li>Création d’autres modèles par la suite</li>
+</ul></li>
+<li>Se focaliser sur les processus et non les services</li>
+<li>Assurer la cohérence des données en les publiant une seule fois avec un nombre réduit de modèle</li>
+</ul>
+</div>
+<div id="choix-du-grain" class="section level2">
+<h2>Choix du grain</h2>
+<ul>
+<li>Décision importante et cruciale dans la modélisation</li>
+<li>Répondre à la question
+<ul>
+<li>Quel niveau de détail doit-il être rendu disponible dans le modèle dimensionnel ?</li>
+</ul></li>
+<li>Développer les modèles dimensionnels basés sur les données les plus atomiques et donc les plus détaillées
+<ul>
+<li>Données hautement dimensionnelles</li>
+<li>Souplesse maximale d’analyse</li>
+</ul></li>
+<li>Élévation du grain entrainant la réduction de dimensions et la vulnérabilité face aux demandes inattendues</li>
+</ul>
+</div>
+<div id="granularité" class="section level2">
+<h2>Granularité</h2>
+<table>
+<colgroup>
+<col width="15%" />
+<col width="24%" />
+<col width="36%" />
+<col width="22%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th>Caractéristiques</th>
+<th>Transaction</th>
+<th>Instantané périodique</th>
+<th>Instantané récapitulatif</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Période de temps</td>
+<td>Point dans le temps</td>
+<td>Intervalles réguliers prévisibles</td>
+<td>Durée in- determinée, généralement courte</td>
+</tr>
+<tr class="even">
+<td>Grain</td>
+<td>Une ligne par événement</td>
+<td>Une ligne par période</td>
+<td>Une ligne pour la vie de l’entité</td>
+</tr>
+<tr class="odd">
+<td>Chargement</td>
+<td>Insertion</td>
+<td>Insertion</td>
+<td>Insertion et mise à jour</td>
+</tr>
+<tr class="even">
+<td>Mise à jour ?</td>
+<td>aucune</td>
+<td>aucune</td>
+<td>Mise à jour pour chaque activité</td>
+</tr>
+<tr class="odd">
+<td>Dimension date ?</td>
+<td>Date de la transaction</td>
+<td>Date de la fin de période</td>
+<td>Dates multiples pour des étapes standard</td>
+</tr>
+<tr class="even">
+<td>Faits</td>
+<td>Activité de la transaction</td>
+<td>Performance dans un intervalle prédéfini</td>
+<td>Performance sur une durée de vie limitée</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div id="choix-des-dimensions" class="section level2">
+<h2>Choix des dimensions</h2>
+<ul>
+<li>Choix naturel une fois le grain de la table de faits choisi pour les dimensions pricipales</li>
+<li>Dimension supplémentaire ne remettant pas en cause le grain choisi (sinon revoir l’étape précédente)</li>
+<li>Séparation de date et d’heure (dimensions souvent présentes)</li>
+<li>Pas de soucis en terme d’espace car tables généralement petites par rapport à la table de faits</li>
+<li>Différents forages possibles
+<ul>
+<li>Vers le bas : ajout d’un attribut à l’intérieur de la hiérarchie naturelle de la dimension ou non</li>
+<li>Vers le haut : suppression d’attributs</li>
+</ul></li>
+</ul>
+</div>
+<div id="dimensions-dégénérées" class="section level2">
+<h2>Dimensions dégénérées</h2>
+<ul>
+<li>Clés de dimension ne correspondant pas à des tables de dimensions</li>
+<li>Courantes avec une granularité au niveau d’une seule transaction ou d’un élément d’une transaction</li>
+<li>Exemple :
+<ul>
+<li>Numéro de transaction d’un Terminal Point de Vente pour une table de faits achats dans un magasin</li>
+<li>Numéro de commande, de facture, de lettre de transport, …</li>
+</ul></li>
+<li>Partie de la clé primaire de la table de faits généralement</li>
+</ul>
+</div>
+<div id="identification-des-faits" class="section level2">
+<h2>Identification des faits</h2>
+<ul>
+<li>Choix en fonction de la granularité définie</li>
+<li>Remise en cause possible de l’étape de définition de la granularité</li>
+<li>Estimation utile du nombre de lignes de la table de faits</li>
+<li>Possibilité de calculer des faits à partir d’autres faits de la table
+<ul>
+<li>Ex : Prix unitaire moyen d’un produit</li>
+<li>Fait : prix unitaire à chaque vente + quantité vendue</li>
+</ul></li>
+</ul>
+</div>
+<div id="faits-additifs-et-non-additifs" class="section level2">
+<h2>Faits additifs et non additifs</h2>
+<ul>
+<li>Attention aux faits additifs et non additifs
+<ul>
+<li>Sommes additives</li>
+<li>Pourcentages et ratios (dont moyennes) non additifs</li>
+<li>Stockage du numérateur et du dénominateur dans la table de faits</li>
+<li>Faire le ratio des sommes et non la somme des ratios</li>
+</ul></li>
+<li>Prix unitaire non additif
+<ul>
+<li>Additionner les ventes en euro et les quantités</li>
+<li>Rapport = prix moyen d’un produit sur une période</li>
+</ul></li>
+</ul>
+</div>
+<div id="schémas-de-modélisation" class="section level2">
+<h2>Schémas de modélisation</h2>
+<p>3 types de schéma du plus simple au plus complexe : - En étoile - En flocon - En constellation</p>
+<p>Dimensions conformes<br />
+- Dimensions potentiellement partagées par des tables de faits différentes<br />
+- Cohérence, Intégration, Productivité</p>
+</div>
+<div id="schéma-en-étoile" class="section level2">
+<h2>Schéma en étoile</h2>
+<ul>
+<li>Une seule table de faits</li>
+<li>Plusieurs tables de dimensions, toutes rattachées directement à la table de faits</li>
+</ul>
+<div class="figure">
+<img src="sid/sid--cours-modelisation-etoile.png" alt="" />
+<p class="caption">Schéma en étoile</p>
+</div>
+</div>
+<div id="schéma-en-flocon-de-neige" class="section level2">
+<h2>Schéma en flocon de neige</h2>
+<ul>
+<li>Normalisation des dimensions</li>
+<li>Notion de hiérarchie au sein d’une dimension</li>
+</ul>
+<div class="figure">
+<img src="sid/sid--cours-modelisation-flocon.png" alt="" />
+<p class="caption">Schéma en flocon</p>
+</div>
+</div>
+<div id="schéma-en-constellation-de-faits" class="section level2">
+<h2>Schéma en constellation de faits</h2>
+<ul>
+<li>Plusieurs tables de faits</li>
+<li>Tables de dimensions reliées à une ou plusieurs tables de faits</li>
+</ul>
+<div class="figure">
+<img src="sid/sid--cours-modelisation-constellation.png" alt="" />
+<p class="caption">Schéma en constellation</p>
+</div>
+</div>
+<div id="atouts-et-faiblesses-de-la-modélisation-dimensionnelle" class="section level2">
+<h2>Atouts et faiblesses de la modélisation dimensionnelle</h2>
+<ul>
+<li>Atouts
+<ul>
+<li>Lisibilité</li>
+<li>Performance</li>
+<li>Possibilité d’acquisition de l’expérience</li>
+</ul></li>
+<li>Faiblesses
+<ul>
+<li>Manque de complétude</li>
+<li>Ajout d’une dimension parfois complexe</li>
+<li>Fondamentalement orientée métier</li>
+</ul></li>
+<li>Modélisation dimensionnelle adaptée pour les magasins de données, plutôt que pour les entrepôts de données</li>
+</ul>
+</div>
+<div id="exemple-northwind" class="section level2">
+<h2>Exemple : Northwind</h2>
+<div class="figure">
+<img src="sid/Northwind_A4_size_for_Print.png" alt="" />
+<p class="caption">Schéma de la BD Northwind</p>
+</div>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

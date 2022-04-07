@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Librairie Google Charts</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Librairie Google Charts</h1>
+
+</div>
+
+
+<div id="introduction-à-son-utilisation" class="section level2">
+<h2>Introduction à son utilisation</h2>
+<p><a href="https://developers.google.com/chart/">Lien</a> vers la librairie</p>
+<ul>
+<li>Librairie facile à utilisée</li>
+<li>Grand choix de graphiques à disposition</li>
+<li>Personnalisation possible</li>
+<li>Sur des données au format <code>DataTable</code> spécifique</li>
+</ul>
+<p><a href="../webreporting/exemple-google-charts.html">Exemple</a></p>
+</div>
+<div id="etapes-pour-son-utilisation" class="section level2">
+<h2>Etapes pour son utilisation</h2>
+<p>Les cinq étapes à suivre pour créer un graphique avec Google Charts</p>
+<ol style="list-style-type: decimal">
+<li><strong>Chargement</strong> de la librairie</li>
+<li>Formatage des <strong>données</strong></li>
+<li><strong>Personnalisation</strong> du graphique</li>
+<li><strong>Création</strong> du graphique</li>
+<li>Ajout d’<strong>interactivité</strong></li>
+</ol>
+</div>
+<div id="chargement-de-la-librairie" class="section level2">
+<h2>Chargement de la librairie</h2>
+<p>En 2 étapes :</p>
+<ol style="list-style-type: decimal">
+<li>Chargement de la librairie <strong>Google JSAPI</strong> avec l’URL <code>https://www.google.com/jsapi</code> dans une balise <code>script</code></li>
+<li>Chargement de la librairie <strong>Google Visualization</strong>, en indiquant le ou les packages à charger (i.e. <code>corechart</code>, <code>table</code>, …) avec la fonction <code>google.load</code> prenant en paramètres :
+<ul>
+<li>la librairie <code>visualization</code></li>
+<li>la version de celle-ci (<code>1</code> pour version stable, <code>1.1</code> pour la nouvelle)</li>
+<li>la liste des packages</li>
+</ul></li>
+</ol>
+<p>Ajout d’une fonction (<code>google.setOnLoadCallback (f)</code>) permettant le lancement d’une fonction <code>f</code> lorsque la librairie est chargée, pour éviter les problèmes de synchronisation</p>
+</div>
+<div id="sur-lexemple" class="section level2">
+<h2>sur l’exemple</h2>
+<pre class="html"><code>&lt;script type=&quot;text/javascript&quot; src=&quot;https://www.google.com/jsapi&quot;&gt;
+&lt;/script&gt;
+&lt;script type=&quot;text/javascript&quot;&gt;
+
+ // Chargement de la librairie et du package corechart
+ google.load(&#39;visualization&#39;, &#39;1.0&#39;, {&#39;packages&#39;:[&#39;corechart&#39;]});
+
+ // Définition de la fonction à exécuter (drawChart) lorsque la 
+ // librairie est chargée
+ google.setOnLoadCallback(drawChart);
+ 
+ ...
+ &lt;/script&gt;</code></pre>
+</div>
+<div id="formatage-des-données" class="section level2">
+<h2>Formatage des données</h2>
+<p>Utilisation de la classe <code>google.visualization.DataTable</code> :</p>
+<ul>
+<li>objet à deux dimensions</li>
+<li>colonnes définies par un type, avec label et/ou id</li>
+</ul>
+<p>Possibilité de créer un objet de différentes manières :</p>
+<ul>
+<li>Création d’un objet vide, définition des colonnes puis insertion des lignes</li>
+<li>A partir d’un tableau JSON, avec un format spécifique (la première ligne contenant les infos des colonnes)</li>
+<li>A partir d’un littéral JSON, avec aussi un format spécifique (deux objets : un pour la définition des colonnes, un pour les valeurs des lignes)</li>
+<li>A l’aide d’une requête <code>SQL</code> sur une source <em>Spreadsheet</em> ou <em>Fusion Table</em></li>
+</ul>
+</div>
+<div id="sur-lexemple-1" class="section level2">
+<h2>sur l’exemple</h2>
+<pre class="js"><code>// Création d une variable, instance de DataTable
+var data = new google.visualization.DataTable();
+
+// Définition des colonnes de la table
+data.addColumn(&#39;string&#39;, &#39;Topping&#39;);
+data.addColumn(&#39;number&#39;, &#39;Slices&#39;);
+
+// Insertion des lignes (ici en une fois)
+data.addRows([
+  [&#39;Mushrooms&#39;, 3],
+  [&#39;Onions&#39;, 1],
+  [&#39;Olives&#39;, 1],
+  [&#39;Zucchini&#39;, 1],
+  [&#39;Pepperoni&#39;, 2]
+]);</code></pre>
+</div>
+<div id="personnalisation-du-graphique" class="section level2">
+<h2>Personnalisation du graphique</h2>
+<p>Chaque graphique est personnalisable à l’aide de paramètres pour certains communs à tous, pour d’autres spécifiques à chaque type de graphique</p>
+<p>Utilisation d’un objet JSON contenant la définition des paramètres du graphique</p>
+<p>Quelques paramètres communs :</p>
+<ul>
+<li><code>width</code> et <code>height</code> : largeur et hauteur du graphique</li>
+<li><code>title</code> : titre</li>
+<li>…</li>
+</ul>
+</div>
+<div id="sur-lexemple-2" class="section level2">
+<h2>sur l’exemple</h2>
+<pre class="js"><code>// Création d un objet JSON
+var options = {
+    // on définit ici le titre et la taille du graphique
+    &#39;title&#39;:&#39;How Much Pizza I Ate Last Night&#39;,
+    &#39;width&#39;: 600,
+    &#39;height&#39;: 400,
+    // ainsi que les paramètres de la légende, qui peuvent être 
+    // détaillée dans un objet JSON
+    &#39;legend&#39;: {
+        position: &#39;bottom&#39;, 
+        textStyle: {
+            color: &#39;blue&#39;, 
+            fontSize: 10
+        }
+    }
+};</code></pre>
+</div>
+<div id="création-du-graphique" class="section level2">
+<h2>Création du graphique</h2>
+<p>En 2 étapes :</p>
+<ul>
+<li>Instanciation dans une variable du type de graphique (via une fonction spécifique à chaque type de l’objet <code>google.visualization</code> prenant en paramètre l’id de la div conteneur)
+<ul>
+<li><code>PieChart</code> pour un diagramme circulaire</li>
+<li><code>BarChart</code> pour un diagramme en barre horizontale</li>
+<li>…</li>
+</ul></li>
+<li>Dessin du graphique via la fonction <code>draw()</code> prenant en paramètre deux objets
+<ul>
+<li>les données</li>
+<li>les options</li>
+</ul></li>
+</ul>
+</div>
+<div id="sur-lexemple-3" class="section level2">
+<h2>sur l’exemple</h2>
+<pre class="js"><code>// Création d une instance de PieChart, et indication du conteneur 
+// du graphique
+var cont = document.getElementById(&#39;chart_div&#39;);
+var chart = new google.visualization.PieChart(cont);
+
+// Dessin du graphique selon les données et les options 
+// en paramètres
+chart.draw(data, options);</code></pre>
+<p><strong>Note</strong> Dans le corps du fichier HTML doit se trouver une <code>div</code> dont l’identifiant est <code>chart_div</code></p>
+<pre><code>&lt;body&gt;
+    &lt;div id=&quot;chart_div&quot;&gt;&lt;/div&gt;
+&lt;/body&gt;</code></pre>
+</div>
+<div id="ajout-dinteractivité" class="section level2">
+<h2>Ajout d’interactivité</h2>
+<p>Possibilité d’ajouter un <em>listener</em> sur un graphique (via la fonction <code>google.visualization.events.addListener()</code>) prenant en paramètre :</p>
+<ul>
+<li>la variable instance du graphique</li>
+<li>le type d’événement
+<ul>
+<li><code>ready</code>, <code>select</code>, <code>error</code>, <code>onmouseover</code> et <code>onmouseout</code></li>
+</ul></li>
+<li>la fonction à exécuter lors de l’événement</li>
+</ul>
+<p>Fonctions des instances intéressantes dans ce cas :</p>
+<ul>
+<li><code>getSelection</code>, <code>getValue</code></li>
+<li><code>setSelection</code></li>
+</ul>
+</div>
+<div id="sur-lexemple-4" class="section level2">
+<h2>sur l’exemple</h2>
+<pre class="js"><code>// Définition de la fonction a exécuter lors de l événement
+function selectHandler() {
+    // Récupération de la sélection
+    var selectedItem = chart.getSelection()[0];
+    // si sélection
+    if (selectedItem) {
+        // récupération de la valeur choisie
+        var topping = data.getValue(selectedItem.row, 0);
+        // affichage via pop-up classique
+        alert(&#39;The user selected &#39; + topping);
+    }
+}
+// Ajout du listener sur le graphique, pour l événement &quot;select&quot;
+google.visualization.events.addListener(
+    chart, &#39;select&#39;, selectHandler);    </code></pre>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

@@ -1,10 +1,9 @@
 ---
 title: "Interrogation de données avec R"
 author: "FX Jollois"
----
-
 date: "... ou comment faire du SQL sans SQL dans R"
 output: ioslides_presentation
+---
 
 ## Introduction
 

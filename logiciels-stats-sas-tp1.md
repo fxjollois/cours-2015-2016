@@ -27,21 +27,33 @@ Pas de difficulté majeure, si ce n'est la taille de la variable `Species` (des 
     impossible à afficher
 </object>
       
-[`heart.txt`](logiciels-stats/heart.txt)Ici non plus, pas de difficulté. Le séparateur est la tabulation (`'09'x` pour SAS). 
+[`heart.txt`](logiciels-stats/heart.txt)
 
-Utiliser la procédure `IMPORT` ici.
+Ici non plus, pas de difficulté. Le séparateur est la tabulation (`'09'x` pour SAS). 
+
+Utiliser la procédure `IMPORT` ici.
+
+
 <object data="logiciels-stats/heart.txt" type="text/plain" class="fichier">
     impossible à afficher
 </object>
 
-[`Detroit_homicide.txt`](logiciels-stats/Detroit_homicide.txt)Ici, les premières lignes ne sont pas à prendre en considération lors de l'importation. Et nous avons des `labels` pour les variables.<object data="logiciels-stats/Detroit_homicide.txt" type="text/plain" class="fichier">
+[`Detroit_homicide.txt`](logiciels-stats/Detroit_homicide.txt)
+
+Ici, les premières lignes ne sont pas à prendre en considération lors de l'importation. Et nous avons des `labels` pour les variables.
+
+<object data="logiciels-stats/Detroit_homicide.txt" type="text/plain" class="fichier">
     impossible à afficher
 </object>
 
-[`hepatitis.TXT`](logiciels-stats/hepatitis.TXT)Attention à l'indicateur de données manquantes (`?` dans ce fichier).
-<object data="logiciels-stats/hepatitis.TXT" type="text/plain" class="fichier">
+[`hepatitis.TXT`](logiciels-stats/hepatitis.TXT)
+
+Attention à l'indicateur de données manquantes (`?` dans ce fichier).
+
+<object data="logiciels-stats/hepatitis.TXT" type="text/plain" class="fichier">
     impossible à afficher
-</object>      
+</object>
+      
 
 
 ## Formats, informats et langage

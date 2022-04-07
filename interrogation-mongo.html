@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Interrogation de données</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Interrogation de données</h1>
+<h4 class="date">du NoSQL avec MongoDB</h4>
+
+</div>
+
+
+<div id="plan" class="section level2">
+<h2>Plan</h2>
+<ul>
+<li>Introduction à MongoDB
+<ul>
+<li>JSON</li>
+<li>NoSQL</li>
+</ul></li>
+<li>Opérations usuelles</li>
+</ul>
+</div>
+<div id="présentation" class="section level2">
+<h2>Présentation</h2>
+<p>BD NoSQL distribué de type <em>Document Store</em> (<a href="http://www.mongodb.com/">site web</a>)</p>
+<p>Objectifs :</p>
+<ul>
+<li>Gérer de gros volumes</li>
+<li>Facilité de déploiement et d’utilisation</li>
+<li>Possibilité de faire des choses complexes tout de même</li>
+</ul>
+</div>
+<div id="modèle-des-données" class="section level2">
+<h2>Modèle des données</h2>
+<p>Principe de base : les données sont des <code>documents</code></p>
+<ul>
+<li>stocké en <em>Binary JSON</em> (`BSON)</li>
+<li>documents similaires rassemblés dans des <code>collections</code></li>
+<li>pas de schéma des documents définis en amont
+<ul>
+<li>contrairement à un BD relationnel ou NoSQL de type <em>Column Store</em></li>
+</ul></li>
+<li>les documents peuvent n’avoir aucun point commun entre eux</li>
+<li>un document contient (généralement) l’ensemble des informations
+<ul>
+<li>pas (ou très peu) de jointure à faire</li>
+</ul></li>
+<li>BD respectant <strong>CP</strong> (dans le théorème <em>CAP</em>)
+<ul>
+<li>propriétés ACID au niveau d’un document</li>
+</ul></li>
+</ul>
+</div>
+<div id="point-sur-json" class="section level2">
+<h2>Point sur <code>JSON</code></h2>
+<ul>
+<li><code>JavaScript Object Notation</code></li>
+<li>Créé en 2005</li>
+<li>On parle de <strong>littéral</strong></li>
+<li>Format d’échange de données structurées léger</li>
+<li>Schéma des données non connu
+<ul>
+<li>contenu dans les données</li>
+</ul></li>
+<li>Basé sur deux notions :
+<ul>
+<li>collection de couples clé/valeur</li>
+<li>liste de valeurs ordonnées</li>
+</ul></li>
+</ul>
+<hr />
+<p><em>(<code>JSON</code> suite)</em></p>
+<ul>
+<li>Structures possibles :
+<ul>
+<li>objet (couples clé/valeur) :
+<ul>
+<li><code>{}</code></li>
+<li><code>{ "nom": "jollois", "prenom": "fx" }</code></li>
+</ul></li>
+<li>tableau (collection de valeurs) :
+<ul>
+<li><code>[]</code></li>
+<li><code>[ 1, 5, 10]</code></li>
+</ul></li>
+<li>une valeur dans un objet ou dans un tableau peut être elle-même un littéral</li>
+</ul></li>
+<li>Deux types atomiques (<code>string</code> et <code>number</code>) et trois constantes (<code>true</code>, <code>false</code>, <code>null</code>)</li>
+</ul>
+<p>Validation possible du JSON sur <a href="http://jsonlint.com/">jsonlint.com/</a></p>
+<hr />
+<pre class="json"><code>{
+    &quot;tubd&quot;: {
+        &quot;formation&quot;: &quot;DU Analyste Big Data&quot;,
+        &quot;responsable&quot;: { &quot;nom&quot;: &quot;Poggi&quot;, &quot;prenom&quot;: &quot;JM&quot; },
+        &quot;etudiants&quot; : [
+            { &quot;id&quot;: 1, &quot;nom&quot;: &quot;jollois&quot;, &quot;prenom&quot;: &quot;fx&quot; },
+            { &quot;id&quot;: 2, &quot;nom&quot;: &quot;aristote&quot;, &quot;details&quot;: &quot;délégué&quot; },
+            { &quot;id&quot;: 5, &quot;nom&quot;: &quot;platon&quot; }
+        ],
+        &quot;ouverte&quot;: true
+    },
+    &quot;tudv&quot;: {
+        &quot;formation&quot;: &quot;DU Data Visualisation&quot;,
+        &quot;ouverte&quot;: false,
+        &quot;todo&quot;: [
+            &quot;Creation de la maquette&quot;,
+            &quot;Validation par le conseil&quot;
+            ],
+        &quot;responsable&quot;: { &quot;nom&quot;: &quot;Métivier&quot; }
+    }
+}</code></pre>
+</div>
+<div id="compléments" class="section level2">
+<h2>Compléments</h2>
+<p><code>BSON</code> : extension de <code>JSON</code></p>
+<ul>
+<li>Quelques types supplémentaires (identifiant spécifique, binaire, date, …)</li>
+<li>Distinction entier et réel</li>
+</ul>
+<p><strong>Schéma dynamique</strong></p>
+<ul>
+<li>Documents variant très fortement entre eux, même dans une même collection</li>
+<li>On parle de <strong>self-describing documents</strong></li>
+<li>Ajout très facile d’un nouvel élément pour un document, même si cet élément est inexistant pour les autres</li>
+<li>Pas de <code>ALTER TABLE</code> ou de redesign de la base</li>
+</ul>
+<p><strong>Pas de jointures entre les collections</strong></p>
+</div>
+<div id="langage-dinterrogation" class="section level2">
+<h2>Langage d’interrogation</h2>
+<ul>
+<li>Pas de SQL (bien évidemment), ni de langage proche</li>
+<li>Définition d’un langage propre</li>
+<li>Langage permettant plus que les accès aux données
+<ul>
+<li>définition de variables</li>
+<li>boucles</li>
+<li>…</li>
+</ul></li>
+</ul>
+<p>Commandes suivantes réalisables à partir du <code>shell</code></p>
+<p>Existence d’une librairie R : <a href="https://github.com/mongosoup/rmongodb">rmongodb</a></p>
+</div>
+<div id="restriction" class="section level2">
+<h2>Restriction</h2>
+<p>La commande <code>db.collection.find()</code>, dans laquelle <code>collection</code> désigne la collection sur laquelle on travaille, permet de retourner tous les documents.</p>
+<p>La commande <code>db.collection.findOne()</code> retourne un élément (le premier a priori).</p>
+<p>Pour faire une restriction, on doit passer un critère (ou un ensemble de critère) en paramètre :</p>
+<pre class="js"><code>db.collection.find({ attribut: valeur });</code></pre>
+<p>Les critères sont au format <code>JSON</code></p>
+</div>
+<div id="projection" class="section level2">
+<h2>Projection</h2>
+<p>Toujours avec la commande <code>db.collection.find()</code>, il est possible de ne choisir que certains éléments à afficher. Pour cela, on doit passer en deuxième paramètre un littéral <code>JSON</code> avec pour chaque élément</p>
+<ul>
+<li>si <code>attribut: 1</code>, il sera présent (inclusion)</li>
+<li>si <code>attribut: 0</code>, il sera absent (exclusion)</li>
+<li><code>_id</code> toujours présent, sauf si explicitement exclu (avec <code>_id: 0</code>)</li>
+</ul>
+<p>Si on veut une projection sans restriction :</p>
+<pre class="js"><code>db.collection.find({ }, { attribut1: 1, attribut2: 1 });</code></pre>
+</div>
+<div id="décompte-limitation-du-résultat-et-tri" class="section level2">
+<h2>Décompte, Limitation du résultat et Tri</h2>
+<p>Pour compter le nombre de documents :</p>
+<pre class="js"><code>db.collection.find().count();</code></pre>
+<p>Pour n’avoir que les <span class="math inline">\(n\)</span> premiers documents :</p>
+<pre class="js"><code>db.collection.find().limit(10);</code></pre>
+<p>Pour trier les documents, fonction <code>sort()</code>, qui prend en paramètre un littéral décrivant quels attributs on utilise et comment :</p>
+<ul>
+<li>si <code>attribut: 1</code> : tri croissant</li>
+<li>si <code>attribut: -1</code> : tri décroissant</li>
+</ul>
+<pre class="js"><code>db.collection.find().sort({ attribut: 1 });</code></pre>
+</div>
+<div id="agrégat" class="section level2">
+<h2>Agrégat</h2>
+<p>Il existe la fonction <code>db.collection.aggregate( tableau )</code> qui permet le calcul d’agrégat. Le tableau peut contenir les éléments suivants (dans des littéraux) :</p>
+<ul>
+<li><code>$project</code> : redéfinition des documents (si nécessaire)</li>
+<li><code>$match</code> : restriction sur les documents à utiliser</li>
+<li><code>$group</code> : regroupements et calculs à effectuer</li>
+<li><code>$sort</code> : tri sur les agrégats</li>
+<li>…</li>
+</ul>
+<pre class="js"><code>db.collection.aggregate([
+    { $group: { 
+        _id: &quot;$attributQl&quot;, 
+        total: { $sum: &quot;$attributQt&quot; } 
+    } }
+])</code></pre>
+</div>
+<div id="curseurs" class="section level2">
+<h2>Curseurs</h2>
+<p>Il n’existe <strong>pas de processus de jointures</strong> dans MongoDB (ce n’est pas l’idée).</p>
+<p>Pour cela, on doit utiliser des curseurs (ou <code>cursor</code>) en stockant le résulat d’un <code>find()</code> dans une variable, on créé un <code>cursor</code>. Celui-ci a des fonctions permettant de naviguer dans ce résultat (pour faire les jointures)</p>
+<ul>
+<li><code>cursor.hasNext()</code> : pour savoir s’il reste des documents dedans</li>
+<li><code>cursor.next()</code> : document suivant dans le curseur</li>
+<li><code>cursor.objsLeftInBatch()</code> : pour savoir combien de document il reste dans le curseur</li>
+</ul>
+</div>
+<div id="map-reduce" class="section level2">
+<h2>Map-Reduce</h2>
+<p>Le paradigme <strong>Map-Reduce</strong> permet de décomposer une tâche en deux étapes :</p>
+<ol style="list-style-type: decimal">
+<li><strong>Map</strong> : application d’un algo sur chaque document, cet algo renvoyant un résultat ou une série de résultat</li>
+<li><strong>Reduce</strong> : synthèse des résultats renvoyés dans l’étape précédente selon certains critères</li>
+</ol>
+<p>Exemple classique : <em>décompte des mots présents dans un ensemble de texte</em></p>
+<ul>
+<li><em>Map</em> : pour chaque texte, à chaque mot rencontré, on créé un couple <code>&lt;mot, 1&gt;</code> (un document = beaucoup de résultats générés)</li>
+<li><em>Reduce</em> : pour chaque mot, on fait la somme des valeurs pour obtenir le nombre de fois où chaque mot apparaît dans l’ensemble des textes à disposition</li>
+</ul>
+</div>
+<div id="map-reduce-suite" class="section level2">
+<h2>Map-Reduce (suite)</h2>
+<p>On utilise la fonction <code>db.collection.mapReduce()</code> pour appliquer l’algo Map-Reduce sur les documents de la collection, avec les paramètres suivants :</p>
+<ul>
+<li><code>map</code> : fonction JavaScript
+<ul>
+<li>aucun paramètre</li>
+<li><code>emit(key, value)</code> pour créer un couple résultat</li>
+</ul></li>
+<li><code>reduce</code> : fonction JavaScript
+<ul>
+<li>deux paramètres : <code>key</code> et <code>values</code> (tableau des valeurs créés à l’étape précédente)</li>
+<li><code>return result</code> pour renvoyer le résultat</li>
+</ul></li>
+<li><code>out</code> : collection dans laquelle stocker les résultats</li>
+<li>…</li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>

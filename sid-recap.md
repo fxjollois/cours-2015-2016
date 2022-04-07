@@ -1,10 +1,8 @@
 ---
 title: Informatique Décisionnelle
 author: Récapitulatif
----
-
 date: DUT STID 2ème année
-
+---
 
 ## Démarche décisionnelle
 

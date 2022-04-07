@@ -1,0 +1,7 @@
+name: "cours-2015-2016"
+output_dir: .
+navbar:
+  title: "Supports de cours de FX Jollois"
+output:
+  html_document:
+    theme: journal

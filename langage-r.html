@@ -1,0 +1,568 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+
+
+<title>Langage R</title>
+
+<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark it active
+  menuAnchor.tab('show');
+
+  // if it's got a parent navbar menu mark it active as well
+  menuAnchor.closest('li.dropdown').addClass('active');
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">Langage R</h1>
+
+</div>
+
+
+<div id="le-logiciel" class="section level2">
+<h2>Le logiciel</h2>
+<p><a href="http://www.r-project.org"><strong>R</strong></a> :</p>
+<ul>
+<li>outil très présent dans le monde scientifique et de plus en plus présent dans les entreprises</li>
+<li>open source : gratuit, modifiable</li>
+<li>langage de script</li>
+<li>de nombreux packages pour augmenter les capacités</li>
+<li>outil complémentaire : <a href="https://www.rstudio.com/">RStudio</a>
+<ul>
+<li>Interface de développement pratique et bien pensée</li>
+</ul></li>
+</ul>
+</div>
+<div id="concepts-importants---données" class="section level2">
+<h2>Concepts importants - données</h2>
+<p>Dans <strong>R</strong>, on manipule des variables pour avoir comme types d’objet :</p>
+<ul>
+<li><code>vector</code> : tableau de <span class="math inline">\(n\)</span> éléments de type identique - un scalaire est considéré comme un <code>vector</code> dans <strong>R</strong></li>
+<li><code>matrix</code> : tableau à 2 dimensions (tous les élements doivent avoir le même type)</li>
+<li><code>array</code>: extension de <code>matrix</code> à <span class="math inline">\(d\)</span> dimensions (<span class="math inline">\(d\)</span> pouvant être supérieur à 3)</li>
+<li><code>data.frame</code> : équivalent à une table <strong>SAS</strong> ou <strong>SQL</strong> (ensemble de lignes caractérisées par des colonnes, ayant des types différents éventuellement)</li>
+<li><code>list</code> : collection d’objets (<code>vector</code>, <code>matrix</code>, …)</li>
+</ul>
+</div>
+<div id="concepts-importants---types" class="section level2">
+<h2>Concepts importants - types</h2>
+<p>Pour les éléments, il existe différents types de valeur possible</p>
+<ul>
+<li><code>null</code> : valeur <code>null</code></li>
+<li><code>NA</code> : valeur manquante dans un vecteur ou autre</li>
+<li><code>integer</code> : entier</li>
+<li><code>numeric</code> (<code>double</code>, <code>real</code>) : réel</li>
+<li><code>character</code> : chaîne de caractères</li>
+<li><code>factor</code> : variable qualitative (format dédié)</li>
+<li><code>date</code> : pour les aspects temporels (date + heure + fuseau horaire)</li>
+</ul>
+</div>
+<div id="manipulation-de-variables" class="section level2">
+<h2>Manipulation de variables</h2>
+<div class="columns-2">
+<ul>
+<li>Affectation : <code>=</code> ou <code>&lt;-</code></li>
+<li>Opérateurs classiques :
+<ul>
+<li><code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>**</code>, <code>()</code>, …</li>
+<li><code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></li>
+</ul></li>
+<li>élément <span class="math inline">\(i\)</span> d’un vecteur : <code>vecteur[i]</code>
+<ul>
+<li><code>i</code> commence à 1</li>
+</ul></li>
+<li>éléments d’une <code>matrix</code> ou d’un <code>data.frame</code> :
+<ul>
+<li>cellule <span class="math inline">\(i,j\)</span> : <code>matrice[i,j]</code></li>
+<li>ligne <span class="math inline">\(i\)</span> : <code>matrice[i,]</code></li>
+<li>colonne <span class="math inline">\(j\)</span> : <code>matrice[,j]</code></li>
+<li>colonne <span class="math inline">\(j\)</span> spécifiquement pour <code>data.frame</code> : <code>df[j]</code></li>
+</ul></li>
+<li>Opérations sur <code>vector</code> ou <code>matrix</code> ou <code>data.frame</code> possibles :
+<ul>
+<li>élément par élément : <code>+</code>, <code>-</code>, …, <code>==</code>, …</li>
+<li>comparaison d’ensemble : <code>%in%</code> (plutôt pour <code>vector</code>)</li>
+<li>multiplication matricielle : <code>%*%</code></li>
+</ul></li>
+</ul>
+</div>
+</div>
+<div id="utilisation-de-fonctions" class="section level2">
+<h2>Utilisation de fonctions</h2>
+<p>En plus des opérateurs de base, comme dans tout langage impératif, il existe un grand nombre de fonction de base, plus un grand nombre de <strong>packages</strong> permettant d’augmenter les capacités du langage.</p>
+<p>Spécificités</p>
+<ul>
+<li>Appel classique (<code>fonction(paramètres)</code>)</li>
+<li>Mais paramètres nommés, avec valeur par défaut possible
+<ul>
+<li>utilisation classique : une valeur par paramètre, dans l’ordre</li>
+<li>utilisation sans ordre : <code>paramètre = valeur</code>, dans l’ordre souhaité</li>
+<li>utilisation avec valeur par défaut : valeurs seulement pour les paramètres dont on doit donner une valeur, et éventuellement d’autres dont on veut modifier la valeur par défaut</li>
+</ul></li>
+</ul>
+</div>
+<div id="exemple-de-fonction" class="section level2">
+<h2>Exemple de fonction</h2>
+<div class="columns-2">
+<pre class="r"><code># Fonction faisant la somme de a et de b
+# a : valeur obligatoire lors de l&#39;appel
+# b : valeur optionnel (10 si non donné)
+f &lt;- function (a, b = 10) {
+    res = a + b
+    return (res)
+}
+# classique
+f(1, 2)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code># classique avec nommage
+f(a = 1, b = 2)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code># ordre inversé
+f(b = 2, a = 1)</code></pre>
+<pre><code>## [1] 3</code></pre>
+<pre class="r"><code># avec valeur par défaut pour b
+f(1)</code></pre>
+<pre><code>## [1] 11</code></pre>
+<pre class="r"><code># idem avec nommage explicite de a
+f(a = 1)</code></pre>
+<pre><code>## [1] 11</code></pre>
+</div>
+</div>
+<div id="eléments-de-langage" class="section level2">
+<h2>Eléments de langage</h2>
+<div id="expressions-multiples" class="section level3">
+<h3>Expressions multiples</h3>
+<ul>
+<li>séparées par un saut de ligne ou par <code>;</code> (optionnel si saut de ligne)</li>
+<li>inclus dans des <code>{ }</code> dans les opérateurs suivants</li>
+</ul>
+</div>
+<div id="traitement-conditionnel" class="section level3">
+<h3>Traitement conditionnel</h3>
+<ul>
+<li><code>if (condition) expression</code></li>
+<li><code>if (condition) expression else expression</code></li>
+</ul>
+</div>
+<div id="traitement-itératif" class="section level3">
+<h3>Traitement itératif</h3>
+<ul>
+<li><code>for (variable in sequence) expression</code></li>
+<li><code>while (condition) expression</code></li>
+</ul>
+</div>
+</div>
+<div id="importation-de-données" class="section level2">
+<h2>Importation de données</h2>
+<p>Importation de fichier texte avec la commande <code>read.table()</code>, avec les paramètres suivants (avec <code>valeur</code> par défaut éventuelle) :</p>
+<ul>
+<li><code>file</code> : nom du fichier</li>
+<li><code>header</code> : présence ou non des noms de variables (<code>FALSE</code>)</li>
+<li><code>sep</code> : séparateur de variable (<code></code>)</li>
+<li><code>na.strings</code> : chaîne(s) pour valeurs manquantes (<code>NA</code>)</li>
+<li><code>skip</code> : nombre de lignes à ne pas prendre en compte en début de fichier (<code>0</code>)</li>
+<li><code>nrow</code> : nombre de lignes à lire (<code>-1</code>)</li>
+<li><code>stringsAsFactors</code> : transformations des chaînes en <code>factor</code> ou non (<code>TRUE</code>)</li>
+<li>…</li>
+</ul>
+<p>Fonction renvoyant un <code>data.frame</code></p>
+</div>
+<div id="importation-de-données-1" class="section level2">
+<h2>Importation de données</h2>
+<ul>
+<li>Quelques fonctions dérivés avec des valeurs par défaut différentes
+<ul>
+<li><code>read.csv()</code>, <code>read.csv2()</code></li>
+<li><code>read.delim()</code>, <code>read.delim2()</code></li>
+</ul></li>
+<li>Fonction <code>write.table</code> permettant d’écrire dans un fichier texte, à partir d’un <code>data.frame</code></li>
+</ul>
+<p>Si besoin, fonction <code>readLines()</code></p>
+<ul>
+<li>Lecture direct du texte</li>
+<li>Renvoi un <code>vector</code> de taille nombre de ligne (une ligne par <code>cellule</code> du tableau)</li>
+<li>Utile si on ne connaît pas le format ou si celui-ci est trop complexe pour <code>read.table()</code></li>
+</ul>
+</div>
+<div id="restitution-de-données" class="section level2">
+<h2>Restitution de données</h2>
+<ul>
+<li>Dans la console, taper le nom de la variable permet de l’afficher</li>
+<li>Comportement idem que d’utiliser la fonction <code>print()</code> (une seule variable)</li>
+<li>Fonction <code>cat()</code> permettant d’afficher en une fois plusieurs variables ou chaînes</li>
+</ul>
+<div class="columns-2">
+<pre class="r"><code>a = &quot;FX&quot;
+a</code></pre>
+<pre><code>## [1] &quot;FX&quot;</code></pre>
+<pre class="r"><code>print(a)</code></pre>
+<pre><code>## [1] &quot;FX&quot;</code></pre>
+<pre class="r"><code>cat(&quot;Bonjour&quot;, a)</code></pre>
+<pre><code>## Bonjour FX</code></pre>
+<pre class="r"><code>cat(&quot;Bonjour &quot;, a, 
+    &quot;, bonne journée !&quot;, sep = &quot;&quot;)</code></pre>
+<pre><code>## Bonjour FX, bonne journée !</code></pre>
+</div>
+</div>
+<div id="attributs-dun-data.frame" class="section level2">
+<h2>Attributs d’un <code>data.frame</code></h2>
+<p>Un <code>data.frame</code>, en plus de sa valeur, peut avoir des attributs. C’est une liste spécifique.</p>
+<ul>
+<li>liste des attributs avec la fonction <code>attributes</code>
+<ul>
+<li><code>class</code> : <code>data.frame</code></li>
+<li><code>names</code> : nom des variables</li>
+<li><code>row.names</code> : nom des objets (liste de <span class="math inline">\(1\)</span> à <span class="math inline">\(n\)</span> si rien de spécifié)</li>
+</ul></li>
+<li>attribution d’un attribut avec la fonction <code>attr(df, attr)</code></li>
+</ul>
+<p>Fonctions utiles</p>
+<ul>
+<li><code>dim(df)</code>, <code>nrow(df)</code>, <code>ncol(df)</code> : dimensions (nb lignes et nb colonnes) en une fois ou séparemment</li>
+</ul>
+</div>
+<div id="exemple" class="section level2 smaller">
+<h2 class="smaller">Exemple</h2>
+<div class="columns-2">
+<pre class="r"><code>a = data.frame(x = 1:4, y = 5:8)
+print(a)</code></pre>
+<pre><code>##   x y
+## 1 1 5
+## 2 2 6
+## 3 3 7
+## 4 4 8</code></pre>
+<pre class="r"><code>dim(a)</code></pre>
+<pre><code>## [1] 4 2</code></pre>
+<pre class="r"><code>nrow(a)</code></pre>
+<pre><code>## [1] 4</code></pre>
+<pre class="r"><code>ncol(a)</code></pre>
+<pre><code>## [1] 2</code></pre>
+<pre class="r"><code>attr(a, &quot;info&quot;) = &quot;exemple de data.frame&quot;
+attributes(a)</code></pre>
+<pre><code>## $names
+## [1] &quot;x&quot; &quot;y&quot;
+## 
+## $class
+## [1] &quot;data.frame&quot;
+## 
+## $row.names
+## [1] 1 2 3 4
+## 
+## $info
+## [1] &quot;exemple de data.frame&quot;</code></pre>
+</div>
+</div>
+<div id="interrogation-de-données" class="section level2">
+<h2>Interrogation de données</h2>
+<p>cf slides</p>
+<ul>
+<li><a href="interrogation-concepts.html">Concepts pour l’interrogation de données</a></li>
+<li><a href="interrogation-r.html">Interrogation de données sous R</a></li>
+</ul>
+</div>
+<div id="statistiques-descriptives-univariées" class="section level2">
+<h2>Statistiques descriptives univariées</h2>
+<p>cf slides</p>
+<ul>
+<li><a href="stats-desc-r.html">Statistiques descriptives sous R</a></li>
+</ul>
+</div>
+<div id="statistiques-exploratoires" class="section level2">
+<h2>Statistiques exploratoires</h2>
+<p>cf slides</p>
+<ul>
+<li><a href="stats-explo-r.html">Statistiques exploratoires sous R</a></li>
+</ul>
+</div>
+
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
