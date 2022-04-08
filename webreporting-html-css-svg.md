@@ -1,6 +1,6 @@
 ---
 title: Prog Web
-date: HTML, CSS, SVG
+author: HTML, CSS, SVG
 ---
 
 ## Introduction à la programmation web statique

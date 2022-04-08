@@ -1,6 +1,6 @@
 ---
 title: Librairie D3.js
-date: Data-Driven Documents
+author: Data-Driven Documents
 ---
 
 
