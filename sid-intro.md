@@ -1,6 +1,10 @@
 ---
 title: Informatique décisionnelle
 author: Introduction
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## A noter

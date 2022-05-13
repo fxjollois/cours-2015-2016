@@ -2,6 +2,6 @@
 title: Informatique Décisionnelle
 ---
 
-- [Introduction à l'Informatique décisionnelle](slides/sid-intro.html)
-- [Introduction à la modélisation en SID](slides/sid-modelisation.html)
-- [Récapitulatif](slides/sid-recap.html)
+- [Introduction à l'Informatique décisionnelle](sid-intro.html)
+- [Introduction à la modélisation en SID](sid-modelisation.html)
+- [Récapitulatif](sid-recap.html)

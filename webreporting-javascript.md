@@ -1,5 +1,9 @@
 ---
 title: JavaScript
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Introduction à la programmation web dynamique

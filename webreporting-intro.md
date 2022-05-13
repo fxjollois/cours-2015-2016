@@ -1,5 +1,9 @@
 ---
 title: Web-Reporting
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Introduction à la data visualisation interactive

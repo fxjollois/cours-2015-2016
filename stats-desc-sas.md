@@ -1,5 +1,9 @@
 ---
 title: Statistiques descriptives sous SAS
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Plan

@@ -4,13 +4,12 @@ title: Web Reporting
 
 ## Slides de cours 
 
-- [Introduction au Web Reporting](slides/webreporting-intro.html)
-- [Introduction à la programmation web statique](slides/webreporting-html-css-svg.html)
-- [Introduction à la programmation web dynamique](slides/webreporting-javascript.html)
-- [Introduction à Google Charts](slides/webreporting-google-charts.html)
-- [Introduction à D3.js](slides/webreporting-d3.html)
-	- [Compléments](visualisation-donnees-d3.html)
-- [Introduction à Leaflet](slides/webreporting-leaflet.html)
+- [Introduction au Web Reporting](webreporting-intro.html)
+- [Introduction à la programmation web statique](webreporting-html-css-svg.html)
+- [Introduction à la programmation web dynamique](webreporting-javascript.html)
+- [Introduction à Google Charts](webreporting-google-charts.html)
+- [Introduction à D3.js](webreporting-d3.html)
+- [Introduction à Leaflet](webreporting-leaflet.html)
 
 ## Sujets TP
 

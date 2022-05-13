@@ -1,5 +1,9 @@
 ---
 title: Interrogation de données
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Plan 

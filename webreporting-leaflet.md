@@ -1,6 +1,10 @@
 ---
 title: Librairie Leaflet
 author: Cartographie en JavaScript
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Introduction à son utilisation

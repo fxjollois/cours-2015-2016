@@ -29,7 +29,7 @@
       // Author information
       presenters: [
             {
-        name:  'FX Jollois' ,
+        name:  '… ou comment faire du SQL sans SQL dans SAS' ,
         company: '',
         gplus: '',
         twitter: '',
@@ -104,7 +104,7 @@ slide:not(.current) .plotly.html-widget{
 
 <body style="opacity: 0">
 
-<slides>
+<slides class="layout-widescreen">
 
   <slide class="title-slide segue nobackground">
         <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
@@ -112,11 +112,10 @@ slide:not(.current) .plotly.html-widget{
       <h1 data-config-title><!-- populated from slide_config.json --></h1>
       
       <p data-config-presenter><!-- populated from slide_config.json --></p>
-            <p style="margin-top: 6px; margin-left: -2px;">… ou comment faire du SQL sans SQL dans SAS</p>
           </hgroup>
   </slide>
 
-<slide class=""><hgroup><h2>Introduction</h2></hgroup><article  id="introduction">
+<slide class=""><hgroup><h2>Introduction</h2></hgroup><article  id="introduction" class="smaller ">
 
 <p>But de cette présentation :</p>
 
@@ -139,7 +138,7 @@ slide:not(.current) .plotly.html-widget{
 <li>Connaissance du langage SAS</li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Interrogation de données</h2></hgroup><article  id="interrogation-de-données">
+</article></slide><slide class=""><hgroup><h2>Interrogation de données</h2></hgroup><article  id="interrogation-de-données" class="smaller ">
 
 <p>Ensemble des opérations de l’algèbre relationnelle utilisée pour obtenir des informations à partir d’une base de données relationnelles :</p>
 
@@ -154,7 +153,7 @@ slide:not(.current) .plotly.html-widget{
 
 <p>Les données sont disponibles <a href='http://fxjollois.github.io/accesdonnees.html' title=''>ici</a></p>
 
-</article></slide><slide class=""><hgroup><h2>SQL sous SAS</h2></hgroup><article  id="sql-sous-sas">
+</article></slide><slide class=""><hgroup><h2>SQL sous SAS</h2></hgroup><article  id="sql-sous-sas" class="smaller ">
 
 <p>La <code>PROC SQL</code> sous SAS permet d’exécuter toutes les requêtes SQL :</p>
 
@@ -171,7 +170,7 @@ slide:not(.current) .plotly.html-widget{
   requête(s);
 QUIT;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Autrement sous SAS</h2></hgroup><article  id="autrement-sous-sas">
+</article></slide><slide class=""><hgroup><h2>Autrement sous SAS</h2></hgroup><article  id="autrement-sous-sas" class="smaller ">
 
 <p>Le langage SAS contient deux types d’<em>opérations</em> :</p>
 
@@ -190,7 +189,7 @@ QUIT;</pre>
   commande(s);
 RUN;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Autrement sous SAS (suite)</h2></hgroup><article  id="autrement-sous-sas-suite">
+</article></slide><slide class=""><hgroup><h2>Autrement sous SAS (suite)</h2></hgroup><article  id="autrement-sous-sas-suite" class="smaller ">
 
 <ul>
 <li>Procédure <code>PROC</code> :
@@ -206,7 +205,7 @@ RUN;</pre>
   OPTION(S);
 RUN;</pre>
 
-</article></slide><slide class=""><hgroup><h2>A noter</h2></hgroup><article  id="a-noter">
+</article></slide><slide class=""><hgroup><h2>A noter</h2></hgroup><article  id="a-noter" class="smaller ">
 
 <p>Les étapes <code>DATA</code> ont pour but de créer une nouvelle table, sans affichage, alors que les procédures <code>PROC</code> ont le comportement inverse (affichage sans nécessairement de stockage du résultat). Pour afficher une table sous SAS, on utilise le code suivant :</p>
 
@@ -214,7 +213,7 @@ RUN;</pre>
   OPTION(S);
 RUN;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Restriction</h2></hgroup><article  id="restriction">
+</article></slide><slide class=""><hgroup><h2>Restriction</h2></hgroup><article  id="restriction" class="smaller ">
 
 <ul>
 <li>2 possibilités
@@ -238,7 +237,7 @@ RUN;
 PROC PRINT DATA = nom_table (WHERE= (condition(s)));
 RUN;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Projection</h2></hgroup><article  id="projection">
+</article></slide><slide class=""><hgroup><h2>Projection</h2></hgroup><article  id="projection" class="smaller ">
 
 <ul>
 <li>Dans une étape <code>DATA</code> :
@@ -260,7 +259,7 @@ PROC SORT DATA = nouvelle_table NODUPKEY;
   BY nom_colonne(s);      *nouveau nom ici;
 RUN;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Calcul et fonction</h2></hgroup><article  id="calcul-et-fonction">
+</article></slide><slide class=""><hgroup><h2>Calcul et fonction</h2></hgroup><article  id="calcul-et-fonction" class="smaller ">
 
 <ul>
 <li>Définition des calculs dans un <code>DATA</code></li>
@@ -275,7 +274,7 @@ RUN;</pre>
   nom2 = fonction(colonne, paramètre(s));
 RUN;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Agrégat</h2></hgroup><article  id="agrégat">
+</article></slide><slide class=""><hgroup><h2>Agrégat</h2></hgroup><article  id="agrégat" class="smaller ">
 
 <ul>
 <li>3 possibilités :
@@ -298,7 +297,7 @@ RUN;</pre>
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Agrégat - <code>MEANS</code> ou <code>SUMMARY</code></h2></hgroup><article  id="agrégat---means-ou-summary">
+</article></slide><slide class=""><hgroup><h2>Agrégat - <code>MEANS</code> ou <code>SUMMARY</code></h2></hgroup><article  id="agrégat---means-ou-summary" class="smaller ">
 
 <pre class = 'prettyprint lang-sas'>PROC MEANS DATA = nom_table liste_stats;
   VAR liste_colonnes_calculs;
@@ -313,7 +312,7 @@ RUN;</pre>
 
 <p><em>NB</em> : si on veut faire différents calculs pour différentes variables, on doit préciser <code>stat(colonne) = nom_stat</code> pour chaque calcul voulu.</p>
 
-</article></slide><slide class=""><hgroup><h2>Agrégat - <code>DATA</code></h2></hgroup><article  id="agrégat---data">
+</article></slide><slide class=""><hgroup><h2>Agrégat - <code>DATA</code></h2></hgroup><article  id="agrégat---data" class="smaller ">
 
 <pre class = 'prettyprint lang-sas'>DATA nouvelle_table;
   RETAIN decompte;
@@ -331,7 +330,7 @@ RUN;</pre>
 
 <p><em>NB</em> : ce type de code permet de réaliser un calcul d’agrégat complexe.</p>
 
-</article></slide><slide class=""><hgroup><h2>Opérations ensemblistes</h2></hgroup><article  id="opérations-ensemblistes">
+</article></slide><slide class=""><hgroup><h2>Opérations ensemblistes</h2></hgroup><article  id="opérations-ensemblistes" class="smaller ">
 
 <ul>
 <li>Utilisation d’une étape <code>DATA</code> avec la clause <code>MERGE</code>
@@ -355,7 +354,7 @@ RUN;</pre>
   IF (condition);
 RUN;</pre>
 
-</article></slide><slide class=""><hgroup><h2>Jointures</h2></hgroup><article  id="jointures">
+</article></slide><slide class=""><hgroup><h2>Jointures</h2></hgroup><article  id="jointures" class="smaller ">
 
 <ul>
 <li>Utilisation d’une étape <code>DATA</code> avec la clause <code>MERGE</code>
@@ -379,7 +378,7 @@ RUN;</pre>
 </ul></li>
 </ul>
 
-</article></slide><slide class=""><hgroup><h2>Jointures (suite)</h2></hgroup><article  id="jointures-suite">
+</article></slide><slide class=""><hgroup><h2>Jointures (suite)</h2></hgroup><article  id="jointures-suite" class="smaller ">
 
 <pre class = 'prettyprint lang-sas'>PROC SORT DATA = nom_tableA;
   BY variables_jointures;

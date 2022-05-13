@@ -5,7 +5,7 @@ title: BD et Programmation avancées
 ## BD avancées
 
 - Utilisation de [**MongoDB**](https://www.mongodb.org/)
-	- [Interrogation de données](slides/interrogation-mongo.html) avec MongoDB
+	- [Interrogation de données](interrogation-mongo.html) avec MongoDB
 	- [TP de découverte](bd-prog-avancees-bd-tp1.html)
 
 ## Programmation avancée

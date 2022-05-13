@@ -1,339 +1,259 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
+  <title>Informatique décisionnelle</title>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-<meta name="author" content="Introduction" />
-
-
-<title>Informatique décisionnelle</title>
-
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
 
 
 
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <base target="_blank">
 
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Informatique décisionnelle',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
 
+      // Author information
+      presenters: [
+            {
+        name:  'Introduction' ,
+        company: '',
+        gplus: '',
+        twitter: '',
+        www: '',
+        github: ''
+      },
+            ]
+    };
+  </script>
 
+  <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <link href="site_libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="site_libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-deck.js"></script>
 
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
+  <style type="text/css">
 
+    b, strong {
+      font-weight: bold;
+    }
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
+    em {
+      font-style: italic;
+    }
 
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
+    summary {
+      display: list-item;
+    }
 
-  // mark it active
-  menuAnchor.tab('show');
+    details > summary > p:only-child {
+      display: inline;
+    }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
 
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        
+  </style>
 
 
 </head>
 
-<body>
+<body style="opacity: 0">
 
+<slides class="layout-widescreen">
 
-<div class="container-fluid main-container">
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
 
+<slide class=""><hgroup><h2>A noter</h2></hgroup><article  class="smaller " id="a-noter">
 
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">Informatique décisionnelle</h1>
-<h4 class="author">Introduction</h4>
-<h4 class="date">DUT STID 2ème année</h4>
-
-</div>
-
-
-<div id="a-noter" class="section level2">
-<h2>A noter</h2>
-<div id="sources-intéressantes" class="section level3">
 <h3>Sources intéressantes :</h3>
+
 <ul>
-<li><a href="http://wikissimo.aim.asso.fr/" class="uri">http://wikissimo.aim.asso.fr/</a></li>
-<li><a href="http://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27information" class="uri">http://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27information</a></li>
-<li><a href="http://fr.wikipedia.org/wiki/Informatique_d%C3%A9cisionnelle" class="uri">http://fr.wikipedia.org/wiki/Informatique_d%C3%A9cisionnelle</a></li>
+<li><a href='http://wikissimo.aim.asso.fr/' title=''>http://wikissimo.aim.asso.fr/</a></li>
+<li><a href='http://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27information' title=''>http://fr.wikipedia.org/wiki/Syst%C3%A8me_d%27information</a></li>
+<li><a href='http://fr.wikipedia.org/wiki/Informatique_d%C3%A9cisionnelle' title=''>http://fr.wikipedia.org/wiki/Informatique_d%C3%A9cisionnelle</a></li>
 </ul>
-</div>
-<div id="livres-intéressants" class="section level3">
+
 <h3>Livres intéressants :</h3>
+
 <ul>
 <li><em>Entrepôts de données. Guide pratique de modélisation dimensionnelle, 2ème édition</em>, R. Kimball et M. Ross, Vuibert</li>
 <li><em>Concevoir et déployer un data warehouse</em>, R. Kimball, L. Reeves, M. Ross et W. Thornthwaite, Eyrolles</li>
 </ul>
-</div>
-</div>
-<div id="définition-dun-si" class="section level2">
-<h2>Définition d’un SI</h2>
+
+</article></slide><slide class=""><hgroup><h2>Définition d’un SI</h2></hgroup><article  class="smaller " id="définition-dun-si">
+
 <ul>
 <li><p>Ensemble organisé de ressources qui permet de collecter, stocker, traiter et diffuser de l’information ;</p></li>
 <li><p>Composé de deux parties :</p>
+
 <ul>
 <li>Technologique : <strong>logiciels</strong>, de <strong>matériels</strong> et des <strong>réseaux de télécommunication</strong>,</li>
 <li>Sociale : personnels, structure, … (dont nous parlerons pas) ;</li>
 </ul></li>
 <li><p>Ne se résume donc pas à un unique SGBD</p></li>
 </ul>
+
 <p><em>Un SI est un réseau complexe de relations structurées où interviennent hommes, machines et procédures qui a pour but d’engendrer des flux ordonnés d’informations pertinentes provenant de différentes sources et destinées à servir de base aux décisions (Hugues Angot).</em></p>
-</div>
-<div id="composition" class="section level2">
-<h2>Composition</h2>
+
+</article></slide><slide class=""><hgroup><h2>Composition</h2></hgroup><article  class="smaller " id="composition">
+
 <p>Dans un système d’information d’une grande entreprise, on trouve : - <strong>ERP</strong> (pour <em>Enterprise Resource Planning</em>, <strong>PGI</strong> pour <em>Progiciel de Gestion Intégré</em>), intégrant les systèmes informatisés transactionnels ;</p>
+
 <ul>
 <li><p>des <strong>progiciels métiers</strong>, couvrant aussi le front-office, le middle, et/ou le back-office, et qui ne sont pas de conception maison, mais ont été bati par un éditeur spécialisé sur un métier et dont les modes de fonctionnement logiciels correspondent aux meilleurs pratiques constatées à un moment donné ;</p></li>
 <li><p>des systèmes <strong>spécifiques</strong> (non standards, de conception <em>maison</em>, développés sur mesure, que l’on ne trouve pas sur le marché, …), où l’on rencontrera davantage d’applications dans les domaines du calcul de coûts, de la facturation, de l’aide à la production, ou de fonctions annexes.</p></li>
 </ul>
-</div>
-<div id="pourquoi-un-si" class="section level2">
-<h2>Pourquoi un SI ?</h2>
+
+</article></slide><slide class=""><hgroup><h2>Pourquoi un SI ?</h2></hgroup><article  class="smaller " id="pourquoi-un-si">
+
 <ul>
 <li><p>Besoin de faciliter la gestion de l’entreprise au quotidien (rapidité de traitement, erreurs minimisées, simplicité à prévoir des programmes, …);</p></li>
 <li><p>Besoin d’intégrer tous les éléments dans un système permettant l’unicité de chaque information (pas de redondance, données mises à jour en temps réel - par exemple, dans la gestion de stock);</p></li>
 <li><p>Limitation des supports non connectés (papiers, fichiers personnels, …) pour l’intégration de toutes les données dans un même système ;</p></li>
 <li><p>Rendre possible l’interaction directe des clients (particuliers ou entreprises) avec les données de l’entreprise (catalogue en ligne, commande en ligne, échange d’informations entre entreprises, …).</p></li>
 </ul>
+
 <p>Un SI est fait pour que l’entreprise fonctionne au mieux, mais elle a besoin de faire des analyses pour s’améliorer, d’où la nécessité d’un <strong>SI Décisionnel</strong>.</p>
-</div>
-<div id="trois-concepts-importants" class="section level2">
-<h2>Trois concepts importants</h2>
+
+</article></slide><slide class=""><hgroup><h2>Trois concepts importants</h2></hgroup><article  class="smaller " id="trois-concepts-importants">
+
 <ul>
 <li><p><strong>Données</strong> : mesure simple collectée par un capteur ou renseignée par une personne.</p>
+
 <p><em>Par exemple, le client 123456 a retiré 200€ au DAB n°321 le 01/09/2015</em></p></li>
 <li><p><strong>Information</strong> : calcul ou agrégation de données.</p>
+
 <p><em>La moyenne journalière des retraits au DAB n°321 est de 500€</em></p></li>
 <li><p><strong>Connaissance</strong> : résultat d’une réflexion sur la base des informations disponibles, et permettant à l’entreprise de mieux comprendre son fonctionnement et éventuellement de l’améliorer.</p>
+
 <p><em>Le DAB n°321 est très peu utilisé, et d’autres sont présents à proximité, il serait donc économique de le supprimer</em></p></li>
 </ul>
-</div>
-<div id="définition" class="section level2">
-<h2>Définition</h2>
+
+</article></slide><slide class=""><hgroup><h2>Définition</h2></hgroup><article  class="smaller " id="définition">
+
 <p>L’<strong>informatique décisionnelle</strong> (ou <strong>Business Intelligence - BI</strong>) désigne les moyens, les outils et les méthodes qui permettent de collecter, consolider, modéliser et restituer les données d’une entreprise en vue d’offrir une aide à la décision.</p>
+
 <p>Elle cherche à : - Mesurer des indicateurs (ou mesures, <strong>faits</strong>, métriques) - Restituer ceux-ci selon des axes d’analyse (ou <strong>dimensions</strong>)</p>
+
 <p>La réalisation technique est appelée <strong>Entrepôt de données</strong> (ou <strong>Data Warehouse - DW</strong>), global pour l’entreprise, et composé de plusieurs <strong>Magasin de données</strong> (ou <strong>Data Mart - DM</strong>) plus spécifiques.</p>
-</div>
-<div id="objectifs-du-data-warehouse" class="section level2">
-<h2>Objectifs du data warehouse</h2>
+
+</article></slide><slide class=""><hgroup><h2>Objectifs du data warehouse</h2></hgroup><article  class="smaller " id="objectifs-du-data-warehouse">
+
 <ul>
 <li><p>Rendre accessible les informations de l’entreprise (en terme de compréhension et de navigation simple et rapide) ;</p></li>
 <li><p>Rendre cohérente l’information d’une entreprise (qualité de l’information) ;</p></li>
@@ -341,54 +261,53 @@ $(document).ready(function () {
 <li><p>Représenter un bastion sécurisé qui protège le capital information (sécurité, visibilité) ;</p></li>
 <li><p>Constituer la base décisionnelle de l’entreprise (dans le cadre de l’aide à la décision, ce pour quoi le système est fait à la base).</p></li>
 </ul>
+
 <p>Ce n’est pas une <em>alternative</em> au SI, mais bien un <em>complément</em>.</p>
-</div>
-<div id="si-vs-sid" class="section level2">
-<h2>SI vs SID</h2>
+
+</article></slide><slide class=""><hgroup><h2>SI vs SID</h2></hgroup><article  class="smaller " id="si-vs-sid">
+
 <p>2 concepts différents : - <strong>OLTP</strong> : On-Line Transaction Process - <strong>OLAP</strong> : On-Line Analytical Process</p>
-<table>
-<thead>
+
+<table class = 'rmdtable'>
 <tr class="header">
-<th>OLTP</th>
-<th>OLAP</th>
+<th align="left">OLTP</th>
+<th align="left">OLAP</th>
 </tr>
-</thead>
-<tbody>
 <tr class="odd">
-<td>Informatique opérationnelle</td>
-<td>Informatique décisionnelle</td>
+<td align="left">Informatique opérationnelle</td>
+<td align="left">Informatique décisionnelle</td>
 </tr>
 <tr class="even">
-<td>Opérations journalières</td>
-<td>Support décisionnel</td>
+<td align="left">Opérations journalières</td>
+<td align="left">Support décisionnel</td>
 </tr>
 <tr class="odd">
-<td>Orienté applications</td>
-<td>Orienté sujet</td>
+<td align="left">Orienté applications</td>
+<td align="left">Orienté sujet</td>
 </tr>
 <tr class="even">
-<td>Usage répétitif</td>
-<td>Usage occasionnel</td>
+<td align="left">Usage répétitif</td>
+<td align="left">Usage occasionnel</td>
 </tr>
 <tr class="odd">
-<td>Requête simple, courte</td>
-<td>Requête complexe</td>
+<td align="left">Requête simple, courte</td>
+<td align="left">Requête complexe</td>
 </tr>
 <tr class="even">
-<td>Sur peu de données</td>
-<td>Sur des millions de données</td>
+<td align="left">Sur peu de données</td>
+<td align="left">Sur des millions de données</td>
 </tr>
 <tr class="odd">
-<td>Beaucoup d’utilisateurs</td>
-<td>Très peu d’utilisateurs</td>
+<td align="left">Beaucoup d’utilisateurs</td>
+<td align="left">Très peu d’utilisateurs</td>
 </tr>
-</tbody>
 </table>
-</div>
-<div id="eléments-importants-dun-sid" class="section level2">
-<h2>Eléments importants d’un SID</h2>
+
+</article></slide><slide class=""><hgroup><h2>Eléments importants d’un SID</h2></hgroup><article  class="smaller " id="eléments-importants-dun-sid">
+
 <ul>
 <li>Préparation des données : <strong>Extract/Tranform/Load</strong> (<strong>ETL</strong>)
+
 <ul>
 <li><em>Extraction</em> : récupération des différentes données sources</li>
 <li><em>Transformation</em> : calcul d’agrégats, nettoyage, consolidation, …</li>
@@ -397,12 +316,14 @@ $(document).ready(function () {
 <li>Automatisation totale et lancement régulier</li>
 </ul></li>
 <li>Stockages des données :
+
 <ul>
 <li>Coeur du DW</li>
 <li>Data mart : spécifique à un processus de l’entreprise</li>
 <li>Bus permettant la liaison entre data marts</li>
 </ul></li>
 <li>Restitutions des données :
+
 <ul>
 <li>Génération automatique d’états</li>
 <li>Création de reporting ad-hoc</li>
@@ -410,17 +331,16 @@ $(document).ready(function () {
 <li>Requêtage pour analyse statistique ou autre</li>
 </ul></li>
 </ul>
-<div class="figure">
-<img src="sid/sid--cours-intro-schema-general.svg" alt="" />
-<p class="caption">Schéma général d’un data-warehouse</p>
-</div>
-</div>
-<div id="préparation-des-données-etl" class="section level2">
-<h2>Préparation des données (ETL)</h2>
-<div id="extract" class="section level3">
+
+<img src='sid/sid--cours-intro-schema-general.svg' title='fig:'/><p class='caption'>Schéma général d’un data-warehouse</p>
+
+</article></slide><slide class=""><hgroup><h2>Préparation des données (ETL)</h2></hgroup><article  class="smaller " id="préparation-des-données-etl">
+
 <h3>Extract</h3>
+
 <ul>
 <li>Problèmes réguliers :
+
 <ul>
 <li>Hétérogénéité des sources</li>
 <li>Accès aux différentes applications</li>
@@ -429,6 +349,7 @@ $(document).ready(function () {
 <li>N’extraire que les données nouvelles dans les bases de données sources</li>
 </ul></li>
 <li>A prévoir :
+
 <ul>
 <li>Rafraichissement régulier des données</li>
 <li>Marquage des données par la date de dernière modification</li>
@@ -437,14 +358,14 @@ $(document).ready(function () {
 <li>Intégrité du système à garantir (en cas de problème, panne, …)</li>
 </ul></li>
 </ul>
-</div>
-</div>
-<div id="préparation-des-données-etl-1" class="section level2">
-<h2>Préparation des données (ETL)</h2>
-<div id="transform" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Préparation des données (ETL)</h2></hgroup><article  class="smaller " id="préparation-des-données-etl-1">
+
 <h3>Transform</h3>
+
 <ul>
 <li>Comment faire :
+
 <ul>
 <li>Filtrage parfois nécessaire</li>
 <li>Nettoyage, correction orthographique, résolution de conflits de domaine, élèments manquants, conversion à des formats standard</li>
@@ -452,6 +373,7 @@ $(document).ready(function () {
 <li>Modélisation en 3NF (trop coûteuse) ou <strong>dimensionnelle</strong></li>
 </ul></li>
 <li>Problèmes usuels :
+
 <ul>
 <li>Connaissance précise des schémas de toutes les bases</li>
 <li>Combinaison à partir de multiples sources</li>
@@ -460,18 +382,19 @@ $(document).ready(function () {
 </ul></li>
 <li>Modélisation dimensionnelle à privilégier (simplification, rapidité, économie de temps)</li>
 </ul>
-</div>
-</div>
-<div id="préparation-des-données-etl-2" class="section level2">
-<h2>Préparation des données (ETL)</h2>
-<div id="chargement" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Préparation des données (ETL)</h2></hgroup><article  class="smaller " id="préparation-des-données-etl-2">
+
 <h3>Chargement</h3>
+
 <ul>
 <li>Réservation d’un espace mémoire temporel dédié
+
 <ul>
 <li>Estimation de la taille à prévoir</li>
 </ul></li>
 <li>Transfert des données vers les magasins de données
+
 <ul>
 <li>Création si besoin des tables dimensionnelles et de faits</li>
 <li>Insertion sinon</li>
@@ -481,13 +404,13 @@ $(document).ready(function () {
 <li>Avertissement des utilisateurs de la mise à jour du magasin de données</li>
 <li>Précision sur les changements éventuels dans les dimensions et dans les faits</li>
 </ul>
-</div>
-</div>
-<div id="stockage-des-données" class="section level2">
-<h2>Stockage des données</h2>
+
+</article></slide><slide class=""><hgroup><h2>Stockage des données</h2></hgroup><article  class="smaller " id="stockage-des-données">
+
 <ul>
 <li>Stockage dans une base de données le plus souvent relationnelle</li>
 <li>Modélisation dite <strong>dimensionnelle</strong> (ou <em>multi-dimensionnelle</em>)
+
 <ul>
 <li>Différente de la modélisation entité/relation</li>
 <li>Basée sur la notion de <strong>fait</strong> et de <strong>dimension</strong></li>
@@ -495,6 +418,7 @@ $(document).ready(function () {
 </ul></li>
 <li>Nombre restreint de tables par rapport à la BD original</li>
 <li>Utilisation massive de méta-données
+
 <ul>
 <li>Données sur les données</li>
 <li>Structure des tables</li>
@@ -504,111 +428,108 @@ $(document).ready(function () {
 </ul></li>
 <li>Requêtage SQL simplifié</li>
 </ul>
-</div>
-<div id="restitution-des-données" class="section level2">
-<h2>Restitution des données</h2>
+
+</article></slide><slide class=""><hgroup><h2>Restitution des données</h2></hgroup><article  class="smaller " id="restitution-des-données">
+
 <ul>
 <li><strong>Reporting</strong> :
+
 <ul>
 <li>on parle aussi d’<em>état</em></li>
 <li>Tableaux complets d’informations, souvent agrégées, et détaillant une activité selon des axes définis</li>
 </ul></li>
 <li><strong>Dashboard</strong> :
+
 <ul>
 <li>on parle aussi de <em>tableaux de bord</em></li>
 <li>Ensemble de graphiques et de tableaux sur des agrégations d’informations</li>
 </ul></li>
 <li><strong>Scorecard</strong> :
+
 <ul>
 <li>ou bien <em>carte de performance</em></li>
 <li>Version plus agrégée du dashboard, sur des indicateurs dits de performance</li>
 </ul></li>
 </ul>
+
 <p>Dans la pratique, on parle globalement de <strong>Reporting</strong> ou de <strong>Tableaux de bord</strong> pour désigner le tout.</p>
-</div>
-<div id="logiciels" class="section level2">
-<h2>Logiciels</h2>
+
+</article></slide><slide class=""><hgroup><h2>Logiciels</h2></hgroup><article  class="smaller " id="logiciels">
+
 <p>Liste non exhaustive, quelques logiciels parmi l’offre nombreuse.</p>
-<table>
-<thead>
+
+<table class = 'rmdtable'>
 <tr class="header">
-<th></th>
-<th>Payant</th>
-<th>Open source</th>
+<th align="left"></th>
+<th align="left">Payant</th>
+<th align="left">Open source</th>
 </tr>
-</thead>
-<tbody>
 <tr class="odd">
-<td><em>ETL</em></td>
-<td>Microsoft SSIS</td>
-<td>Talend</td>
+<td align="left"><em>ETL</em></td>
+<td align="left">Microsoft SSIS</td>
+<td align="left">Talend</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>Oracle Data Integrator</td>
-<td>Pentaho Data Integration</td>
+<td align="left"></td>
+<td align="left">Oracle Data Integrator</td>
+<td align="left">Pentaho Data Integration</td>
 </tr>
 <tr class="odd">
-<td><em>DW</em></td>
-<td>Microsoft SQL DataWarehouse</td>
-<td>Pentaho</td>
+<td align="left"><em>DW</em></td>
+<td align="left">Microsoft SQL DataWarehouse</td>
+<td align="left">Pentaho</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>Microsoft SQL Server</td>
-<td>SpagoBI</td>
+<td align="left"></td>
+<td align="left">Microsoft SQL Server</td>
+<td align="left">SpagoBI</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>Oracle</td>
-<td>JasperSoft</td>
+<td align="left"></td>
+<td align="left">Oracle</td>
+<td align="left">JasperSoft</td>
 </tr>
 <tr class="even">
-<td><em>Reporting</em></td>
-<td>Tableau Software</td>
-<td>BIRT</td>
+<td align="left"><em>Reporting</em></td>
+<td align="left">Tableau Software</td>
+<td align="left">BIRT</td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>QlikView</td>
-<td>JasperReports</td>
+<td align="left"></td>
+<td align="left">QlikView</td>
+<td align="left">JasperReports</td>
 </tr>
 <tr class="even">
-<td></td>
-<td>Microsoft SSAS</td>
-<td></td>
+<td align="left"></td>
+<td align="left">Microsoft SSAS</td>
+<td align="left"></td>
 </tr>
 <tr class="odd">
-<td></td>
-<td>Business Object</td>
-<td></td>
+<td align="left"></td>
+<td align="left">Business Object</td>
+<td align="left"></td>
 </tr>
-</tbody>
 </table>
-</div>
-<div id="exemple-adventures-works" class="section level2">
-<h2>Exemple : Adventures Works</h2>
-<div class="figure">
-<img src="sid/advworks-schema-BD.png" alt="" />
-<p class="caption">Schéma de la BD Adventure Works</p>
-</div>
-</div>
-<div id="exemple-adventures-works-1" class="section level2">
-<h2>Exemple : Adventures Works</h2>
-<div class="figure">
-<img src="sid/advworks-schema-DW1.png" alt="" />
-<p class="caption">Schéma du Data Mart fait sur Adventure Works, autour des achats de produits</p>
-</div>
+
+</article></slide><slide class=""><hgroup><h2>Exemple : Adventures Works</h2></hgroup><article  class="smaller " id="exemple-adventures-works">
+
+<img src='sid/advworks-schema-BD.png' title='fig:'/><p class='caption'>Schéma de la BD Adventure Works</p>
+
+</article></slide><slide class=""><hgroup><h2>Exemple : Adventures Works</h2></hgroup><article  class="smaller " id="exemple-adventures-works-1">
+
+<img src='sid/advworks-schema-DW1.png' title='fig:'/><p class='caption'>Schéma du Data Mart fait sur Adventure Works, autour des achats de produits</p>
+
 <p>Processus modélisé ici : vente d’un produit à un client par un employé à une date</p>
-</div>
-<div id="demande" class="section level2">
-<h2>Demande</h2>
+
+</article></slide><slide class=""><hgroup><h2>Demande</h2></hgroup><article  class="smaller " id="demande">
+
 <p>CA journalier moyen des clients français, pour les ventes par des représentants, avec paiements par chèque et envoi via Colissimo.</p>
+
 <p>A noter : - Utilisation des presque toutes les tables - Donc beaucoup de jointures - Calcul du CA à partir de <code>Order_Details</code> - Calcul du jour de la semaine à partir de la date <code>OrderDate</code></p>
-</div>
-<div id="a-partir-de-la-bd-source" class="section level2">
-<h2>A partir de la BD source</h2>
-<pre class="sql"><code>SELECT CompanyName, JourSemaine, AVG(CA) AS CAmoyen
+
+</article></slide><slide class=""><hgroup><h2>A partir de la BD source</h2></hgroup><article  class="smaller " id="a-partir-de-la-bd-source">
+
+<pre class = 'prettyprint lang-sql'>SELECT CompanyName, JourSemaine, AVG(CA) AS CAmoyen
   FROM Customers C, Employes E, Payment_Methods PM, 
        Shipping_Methods SM, Orders O, Payments P,
        (SELECT OrderID, 
@@ -627,11 +548,11 @@ $(document).ready(function () {
     AND   C.Country = &quot;France&quot; AND E.Title = &quot;Représentant&quot;
     AND   SM.ShippingMethod = &quot;Colissimo&quot;
     AND   PM.PaymentMethod = &quot;Chèque&quot;
-    GROUP BY CompanyName, JourSemaine;</code></pre>
-</div>
-<div id="a-partir-du-data-mart" class="section level2">
-<h2>A partir du data mart</h2>
-<pre class="sql"><code>SELECT CompanyName, WeekDay, AVG(CA) AS CAmoyen
+    GROUP BY CompanyName, JourSemaine;</pre>
+
+</article></slide><slide class=""><hgroup><h2>A partir du data mart</h2></hgroup><article  class="smaller " id="a-partir-du-data-mart">
+
+<pre class = 'prettyprint lang-sql'>SELECT CompanyName, WeekDay, AVG(CA) AS CAmoyen
     FROM FaitVente V, DimClient C, DimEmploye E, DimDate D,
          (SELECT OrderID, 
                  SUM(UnitPrice * Quantity * (1 - Discount)) AS CA
@@ -645,11 +566,12 @@ $(document).ready(function () {
     AND E.Title = &quot;Représentant&quot;
     AND V.ShippingMethod = &quot;Colissimo&quot;
     AND V.PaymentMethod = &quot;Chèque&quot;
-    GROUP BY CompanyName, WeekDay;</code></pre>
+    GROUP BY CompanyName, WeekDay;</pre>
+
 <p>Requête seulement simplifiée et plus rapide à exécuter. Mais certaines demandes ne peuvent quasiment pas avoir de réponses sur la base de la BD source.</p>
-</div>
-<div id="points-importants" class="section level2">
-<h2>Points importants</h2>
+
+</article></slide><slide class=""><hgroup><h2>Points importants</h2></hgroup><article  class="smaller " id="points-importants">
+
 <ul>
 <li>Se concentrer sur les exigences et les objectifs</li>
 <li>Obtenir le soutien des responsables du côté utilisateur</li>
@@ -662,66 +584,34 @@ $(document).ready(function () {
 <li>Préparer et prendre en compte l’évolution future du système opérationnel et de l’environnement en général</li>
 <li>S’assurer de l’acceptation du système par les utilisateurs</li>
 </ul>
-</div>
-<div id="conclusion" class="section level2">
-<h2>Conclusion</h2>
+
+</article></slide><slide class=""><hgroup><h2>Conclusion</h2></hgroup><article  class="smaller " id="conclusion">
+
 <p>Les SID sont absolument nécessaires dans le cadre d’une entreprise pour : - Avoir une <strong>historisation</strong> complète de ses données ; - Avoir une <strong>vision globale</strong> de son fonctionnement ; - Permettre de répondre à tout demande d’<strong>analyse</strong> pour améliorer ses processus, via des méthodes statistiques et/ou de data-mining ; - Prendre les bonnes <strong>décisions</strong> sur la base de données qualifiées, consolidées et agrégées.</p>
-</div>
-<div id="conclusion-1" class="section level2">
-<h2>Conclusion</h2>
-<div id="impératifs-et-perspectives" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Conclusion</h2></hgroup><article  class="smaller " id="conclusion-1">
+
 <h3>Impératifs et perspectives</h3>
+
 <ul>
 <li>Avancées constantes de la technologie</li>
 <li>Sécurité et confidentialité</li>
 <li>Sauvegarde et sureté du système (destructions physiques, piratage, …)</li>
 <li>Tendances culturelles et politiques
+
 <ul>
 <li>Management par les chiffres</li>
 <li>Utilisation croissante d’indicateurs sophistiqué</li>
 <li>Sous-traitance risquée</li>
 </ul></li>
 </ul>
-</div>
-</div>
-<div id="bien-présenter-les-bonnes-données" class="section level1">
-<h1>Bien présenter les bonnes données</h1>
-</div>
+
+</article></slide><slide class="segue dark nobackground level1"><hgroup class = 'auto-fadein'><h2>Bien présenter les bonnes données</h2></hgroup><article  class="smaller " id="bien-présenter-les-bonnes-données"></article></slide>
 
 
+  <slide class="backdrop"></slide>
 
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
+</slides>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
@@ -730,6 +620,20 @@ $(document).ready(function () {
     script.type = "text/javascript";
     script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
   })();
 </script>
 

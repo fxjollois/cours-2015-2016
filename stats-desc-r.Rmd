@@ -1,5 +1,9 @@
 ---
 title: Statistiques descriptives sous R
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ```{r setup, include=FALSE}

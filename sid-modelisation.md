@@ -1,6 +1,10 @@
 ---
 title: Informatique Décisionnelle
 author: Modélisation
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 

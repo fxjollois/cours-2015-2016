@@ -1,5 +1,9 @@
 ---
 title: Statistiques exploratoires avec R
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Statistiques exploratoires

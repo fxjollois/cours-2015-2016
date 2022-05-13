@@ -1,306 +1,220 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
+  <title>Statistiques descriptives sous R</title>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>Statistiques descriptives sous R</title>
-
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
 
 
 
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <base target="_blank">
 
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Statistiques descriptives sous R',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
 
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
 
+  <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <link href="site_libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="site_libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-deck.js"></script>
 
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
+  <style type="text/css">
 
+    b, strong {
+      font-weight: bold;
+    }
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
+    em {
+      font-style: italic;
+    }
 
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
+    summary {
+      display: list-item;
+    }
 
-  // mark it active
-  menuAnchor.tab('show');
+    details > summary > p:only-child {
+      display: inline;
+    }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
 
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        
+  </style>
 
 
 </head>
 
-<body>
+<body style="opacity: 0">
 
+<slides class="layout-widescreen">
 
-<div class="container-fluid main-container">
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
 
+<slide class=""><hgroup><h2>Plan</h2></hgroup><article  id="plan" class="smaller ">
 
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">Statistiques descriptives sous R</h1>
-
-</div>
-
-
-<div id="plan" class="section level2">
-<h2>Plan</h2>
 <ul>
 <li>Univarié
+
 <ul>
 <li>Variable quantitative</li>
 <li>Variable qualitative</li>
 </ul></li>
 <li>Bivarié
+
 <ul>
 <li>Var quanti vs quanti</li>
 <li>Var quali vs quali</li>
 <li>Var quali vs quanti</li>
 </ul></li>
 </ul>
+
 <p>Avec pour chaque point, les statistiques à calculer et les graphiques usuels à produire.</p>
-</div>
-<div id="univarié" class="section level2">
-<h2>Univarié</h2>
+
+</article></slide><slide class=""><hgroup><h2>Univarié</h2></hgroup><article  id="univarié" class="smaller ">
+
 <p>Fonction <code>summary()</code> :</p>
+
 <ul>
 <li>Statistiques basiques sur un vecteur,</li>
 <li>Dépendantes du type du vecteur
+
 <ul>
 <li><code>numeric</code>: moyenne et quelques autres indicateurs</li>
 <li><code>factor</code> ou <code>character</code> : occurences</li>
 </ul></li>
 <li>Si appliquée sur un <code>data.frame</code>, appliquée sur chaque variable.</li>
 </ul>
-<pre class="r"><code>summary(mtcars)
+
+<pre class = 'prettyprint lang-r'>summary(mtcars)
 summary(mtcars$mpg)
 summary(mtcars$cyl)
-summary(as.factor(mtcars$cyl))</code></pre>
-</div>
-<div id="univarié---quanti" class="section level2">
-<h2>Univarié - quanti</h2>
+summary(as.factor(mtcars$cyl))</pre>
+
+</article></slide><slide class=""><hgroup><h2>Univarié - quanti</h2></hgroup><article  id="univarié---quanti" class="smaller ">
+
 <p>Plusieurs fonctions de calculs de statistiques descriptives</p>
-<pre class="r"><code>mean(mtcars$mpg)
+
+<pre class = 'prettyprint lang-r'>mean(mtcars$mpg)
 sum(mtcars$mpg)
 var(mtcars$mpg)
 sd(mtcars$mpg)
@@ -310,122 +224,156 @@ range(mtcars$mpg)
 median(mtcars$mpg)
 quantile(mtcars$mpg)
 quantile(mtcars$mpg, probs = 0.99)
-quantile(mtcars$mpg, probs = c(0.01, 0.1, 0.9, 0.99))</code></pre>
+quantile(mtcars$mpg, probs = c(0.01, 0.1, 0.9, 0.99))</pre>
+
 <p>Ajouter l’option <code>na.rm = TRUE</code> en cas de données manquantes</p>
-</div>
-<div id="univarié---quanti-1" class="section level2">
-<h2>Univarié - quanti</h2>
+
+</article></slide><slide class=""><hgroup><h2>Univarié - quanti</h2></hgroup><article  id="univarié---quanti-1" class="smaller ">
+
 <p>Il existe tout un ensemble de fonctions graphiques, dont voici quelques exemples</p>
+
 <p><strong>Histogramme</strong></p>
-<pre class="r"><code>hist(mtcars$mpg)
+
+<pre class = 'prettyprint lang-r'>hist(mtcars$mpg)
 hist(mtcars$mpg, breaks = 20)
-hist(mtcars$mpg, breaks = c(10, 15, 18, 20, 22, 25, 35))</code></pre>
+hist(mtcars$mpg, breaks = c(10, 15, 18, 20, 22, 25, 35))</pre>
+
 <p><strong>Boîte à moustache</strong></p>
-<pre class="r"><code>boxplot(mtcars$mpg)</code></pre>
+
+<pre class = 'prettyprint lang-r'>boxplot(mtcars$mpg)</pre>
+
 <p><strong>QQ-plot</strong></p>
-<pre class="r"><code>qqnorm(mtcars$mpg)
-qqline(mtcars$mpg)</code></pre>
-</div>
-<div id="univarié---quali" class="section level2">
-<h2>Univarié - quali</h2>
+
+<pre class = 'prettyprint lang-r'>qqnorm(mtcars$mpg)
+qqline(mtcars$mpg)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Univarié - quali</h2></hgroup><article  id="univarié---quali" class="smaller ">
+
 <p>Deux fonctions pour les calculs d’occurences et de fréquences</p>
-<pre class="r"><code>table(mtcars$cyl)
-prop.table(table(mtcars$cyl))</code></pre>
+
+<pre class = 'prettyprint lang-r'>table(mtcars$cyl)
+prop.table(table(mtcars$cyl))</pre>
+
 <p><strong>Diagramme en barres</strong></p>
-<pre class="r"><code>barplot(table(mtcars$cyl))</code></pre>
+
+<pre class = 'prettyprint lang-r'>barplot(table(mtcars$cyl))</pre>
+
 <p><strong>Diagramme circulaires</strong></p>
-<pre class="r"><code>pie(table(mtcars$cyl))</code></pre>
-</div>
-<div id="bivarié---quanti-vs-quanti" class="section level2">
-<h2>Bivarié - quanti vs quanti</h2>
+
+<pre class = 'prettyprint lang-r'>pie(table(mtcars$cyl))</pre>
+
+</article></slide><slide class=""><hgroup><h2>Bivarié - quanti vs quanti</h2></hgroup><article  id="bivarié---quanti-vs-quanti" class="smaller ">
+
 <p>Calcul des corrélations et des covariances</p>
-<pre class="r"><code>cov(mtcars$mpg, mtcars$wt)
+
+<pre class = 'prettyprint lang-r'>cov(mtcars$mpg, mtcars$wt)
 cor(mtcars$mpg, mtcars$wt)
-cor(mtcars$mpg, mtcars$wt, method = &quot;spearman&quot;) # ou &quot;kendall&quot; - &quot;pearson&quot; par défaut</code></pre>
+cor(mtcars$mpg, mtcars$wt, method = &quot;spearman&quot;) # ou &quot;kendall&quot; - &quot;pearson&quot; par défaut</pre>
+
 <p><strong>Nuage de points</strong></p>
-<pre class="r"><code>plot(mtcars$mpg, mtcars$wt)
+
+<pre class = 'prettyprint lang-r'>plot(mtcars$mpg, mtcars$wt)
 plot(mtcars$mpg ~ mtcars$wt)
-plot(mpg ~ wt, mtcars)</code></pre>
-</div>
-<div id="bivarié---quanti-vs-quanti-1" class="section level2">
-<h2>Bivarié - quanti vs quanti</h2>
+plot(mpg ~ wt, mtcars)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Bivarié - quanti vs quanti</h2></hgroup><article  id="bivarié---quanti-vs-quanti-1" class="smaller ">
+
 <p>On peut aller plus loin en faisant un modéle linéaire simple.</p>
-<pre class="r"><code>m = lm(mpg ~ wt, data = mtcars)
+
+<pre class = 'prettyprint lang-r'>m = lm(mpg ~ wt, data = mtcars)
 m
 summary(m)
 plot(m)
 plot(mpg ~ wt, data = mtcars)
-abline(m, col = &quot;red&quot;)</code></pre>
-</div>
-<div id="bivarié---quali-vs-quali" class="section level2">
-<h2>Bivarié - quali vs quali</h2>
+abline(m, col = &quot;red&quot;)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Bivarié - quali vs quali</h2></hgroup><article  id="bivarié---quali-vs-quali" class="smaller ">
+
 <p>Table de contingence, mais aussi fréquences totales et marginales (en lignes et en colonnes)</p>
-<pre class="r"><code>t &lt;- table(mtcars$cyl, mtcars$am)
+
+<pre class = 'prettyprint lang-r'>t &lt;- table(mtcars$cyl, mtcars$am)
 print(t)
 prop.table(t)
 prop.table(t, margin = 1)
-prop.table(t, margin = 2)</code></pre>
-</div>
-<div id="bivarié---quali-vs-quali-1" class="section level2">
-<h2>Bivarié - quali vs quali</h2>
+prop.table(t, margin = 2)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Bivarié - quali vs quali</h2></hgroup><article  id="bivarié---quali-vs-quali-1" class="smaller ">
+
 <p><strong>Mosaic plot</strong></p>
-<pre class="r"><code>mosaicplot(t) </code></pre>
+
+<pre class = 'prettyprint lang-r'>mosaicplot(t) </pre>
+
 <p><strong>Diagramme d’association</strong></p>
-<pre class="r"><code>assocplot(t)</code></pre>
+
+<pre class = 'prettyprint lang-r'>assocplot(t)</pre>
+
 <p><strong>Diagramme en barres</strong></p>
-<pre class="r"><code>barplot(t)
+
+<pre class = 'prettyprint lang-r'>barplot(t)
 barplot(t, beside = T)
-barplot(prop.table(t, margin = 2), beside = T)</code></pre>
-</div>
-<div id="bivarié---quali-vs-quali-2" class="section level2">
-<h2>Bivarié - quali vs quali</h2>
+barplot(prop.table(t, margin = 2), beside = T)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Bivarié - quali vs quali</h2></hgroup><article  id="bivarié---quali-vs-quali-2" class="smaller ">
+
 <p><strong>Diagramme en barres empilées</strong></p>
-<pre class="r"><code>barplot(prop.table(t, margin = 2))</code></pre>
+
+<pre class = 'prettyprint lang-r'>barplot(prop.table(t, margin = 2))</pre>
+
 <p><strong>Heatmap</strong> (<em>à la main</em>)</p>
-<pre class="r"><code>image(t(t), axes = F)
+
+<pre class = 'prettyprint lang-r'>image(t(t), axes = F)
 axis(1, at = seq(0, 1, length = ncol(t)), labels = colnames(t), lwd = 0)
-axis(2, at = seq(0, 1, length = nrow(t)), labels = rownames(t), lwd = 0)</code></pre>
-</div>
-<div id="bivarié---quali-vs-quanti" class="section level2">
-<h2>Bivarié - quali vs quanti</h2>
+axis(2, at = seq(0, 1, length = nrow(t)), labels = rownames(t), lwd = 0)</pre>
+
+</article></slide><slide class=""><hgroup><h2>Bivarié - quali vs quanti</h2></hgroup><article  id="bivarié---quali-vs-quanti" class="smaller ">
+
 <p>En plus d’obtenir les statistiques par modalité de la variable qualitative, on peut représenter les boîtes à moustaches.</p>
-<pre class="r"><code>tapply(mtcars$mpg, mtcars$cyl, mean)
+
+<pre class = 'prettyprint lang-r'>tapply(mtcars$mpg, mtcars$cyl, mean)
 tapply(mtcars$mpg, mtcars$cyl, summary)
 boxplot(mpg ~ cyl, data = mtcars)
 par(mfrow = c(3, 1), mar = c(2, 2, 2, 0) + 0.1)
 for (c in c(4, 6, 8)) {
   hist(mtcars$mpg[mtcars$cyl == c], xlim = range(mtcars$mpg), main = c)
-}</code></pre>
-</div>
-<div id="pour-aller-plus-loin" class="section level2">
-<h2>Pour aller plus loin</h2>
-<p>Il existe plusieurs librairies pour réaliser des graphiques sous R. Une très utilisée est <a href="http://ggplot2.org/"><code>ggplot2</code></a></p>
+}</pre>
+
+</article></slide><slide class=""><hgroup><h2>Pour aller plus loin</h2></hgroup><article  id="pour-aller-plus-loin" class="smaller ">
+
+<p>Il existe plusieurs librairies pour réaliser des graphiques sous R. Une très utilisée est <a href='http://ggplot2.org/' title=''><code>ggplot2</code></a></p>
+
 <p><strong>Chargement</strong></p>
-<pre class="r"><code>library(ggplot2)
-libraru(reshape2) # pour la fonction melt()</code></pre>
+
+<pre class = 'prettyprint lang-r'>library(ggplot2)
+libraru(reshape2) # pour la fonction melt()</pre>
+
 <p><strong>quanti</strong></p>
-<pre class="r"><code>qplot(mpg, data = mtcars, binwidth = 2)
+
+<pre class = 'prettyprint lang-r'>qplot(mpg, data = mtcars, binwidth = 2)
 qplot(0, mpg, data = mtcars, geom = &quot;boxplot&quot;)
-qplot(sample = mpg, data = mtcars, stat = &quot;qq&quot;)</code></pre>
-</div>
-<div id="ggplot2" class="section level2">
-<h2><code>ggplot2</code></h2>
+qplot(sample = mpg, data = mtcars, stat = &quot;qq&quot;)</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>ggplot2</code></h2></hgroup><article  id="ggplot2" class="smaller ">
+
 <p><strong>quali</strong></p>
-<pre class="r"><code>qplot(factor(cyl), data = mtcars)
+
+<pre class = 'prettyprint lang-r'>qplot(factor(cyl), data = mtcars)
 qplot(cyl, data = mtcars, geom = &quot;bar&quot;)
 ggplot(mtcars, aes(x = factor(1), fill = factor(cyl))) + 
-    geom_bar(width = 1) + coord_polar(theta = &quot;y&quot;)</code></pre>
+    geom_bar(width = 1) + coord_polar(theta = &quot;y&quot;)</pre>
+
 <p><strong>quanti vs quanti</strong></p>
-<pre class="r"><code>qplot(wt, mpg, data = mtcars)
+
+<pre class = 'prettyprint lang-r'>qplot(wt, mpg, data = mtcars)
 qplot(wt, mpg, data = mtcars, geom = c(&quot;point&quot;, &quot;smooth&quot;))
 ggplot(mtcars, aes(x = wt, y = mpg)) + geom_point() + 
     geom_smooth(method = &quot;lm&quot;)
-ggplot(mtcars, aes(x = wt, y = mpg)) + geom_bin2d()</code></pre>
-</div>
-<div id="ggplot2-1" class="section level2">
-<h2><code>ggplot2</code></h2>
+ggplot(mtcars, aes(x = wt, y = mpg)) + geom_bin2d()</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>ggplot2</code></h2></hgroup><article  id="ggplot2-1" class="smaller ">
+
 <p><strong>quali vs quali</strong></p>
-<pre class="r"><code>tab = melt(prop.table(table(mtcars$cyl, mtcars$am), margin = 1))
+
+<pre class = 'prettyprint lang-r'>tab = melt(prop.table(table(mtcars$cyl, mtcars$am), margin = 1))
 ggplot(data=tab, aes(x=factor(Var1), y=value, fill=factor(Var2))) +
     geom_bar(stat=&quot;identity&quot;)
 ggplot(data=tab, aes(x=factor(Var1), y=value, fill=factor(Var2))) +
@@ -435,53 +383,25 @@ tab = melt(table(mtcars$cyl, mtcars$am))
 ggplot(data=tab, aes(x=factor(Var1), y=factor(Var2), fill=value)) +
     geom_tile()
 ggplot(data=tab, aes(x=factor(Var1), y=factor(Var2), size=value)) +
-    geom_point()</code></pre>
-</div>
-<div id="ggplot2-2" class="section level2">
-<h2><code>ggplot2</code></h2>
+    geom_point()</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>ggplot2</code></h2></hgroup><article  id="ggplot2-2" class="smaller ">
+
 <p><strong>quali vs quanti</strong></p>
-<pre class="r"><code>qplot(factor(cyl), mpg, data = mtcars, geom = &quot;boxplot&quot;)
+
+<pre class = 'prettyprint lang-r'>qplot(factor(cyl), mpg, data = mtcars, geom = &quot;boxplot&quot;)
 ggplot(data=mtcars, aes(mpg)) + geom_histogram(binwidth = 2) + 
-    facet_grid(cyl ~ 1)</code></pre>
+    facet_grid(cyl ~ 1)</pre>
+
 <p><strong>et plus encore</strong></p>
-<pre class="r"><code>ggplot(mtcars, aes(mpg, wt, color=hp, size=disp)) + 
-    geom_point() + facet_grid(cyl ~ am)</code></pre>
-</div>
+
+<pre class = 'prettyprint lang-r'>ggplot(mtcars, aes(mpg, wt, color=hp, size=disp)) + 
+    geom_point() + facet_grid(cyl ~ am)</pre></article></slide>
 
 
+  <slide class="backdrop"></slide>
 
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
+</slides>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
@@ -490,6 +410,20 @@ $(document).ready(function () {
     script.type = "text/javascript";
     script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
   })();
 </script>
 

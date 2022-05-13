@@ -1,5 +1,9 @@
 ---
 title: Langage SAS
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Le logiciel

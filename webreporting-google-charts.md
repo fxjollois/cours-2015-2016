@@ -1,5 +1,9 @@
 ---
 title: Librairie Google Charts
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Introduction à son utilisation

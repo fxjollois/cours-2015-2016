@@ -6,7 +6,8 @@ Voici la liste de mes enseignements
 
 - DUT STID 1ère année
    - [Interrogation de données](interrogation-concepts.html)
-   - [Reporting](reporting.html)
+   - Reporting
+   - [Concours Dataviz 2016](concours-dataviz-2016/intro-concours-dataviz-2016.html)
 - DUT STID 2ème année
    - [SID](sid.html)
    - [BD et Programmation avancées](bd-prog-avancees.html)
@@ -15,7 +16,7 @@ Voici la liste de mes enseignements
 - Master IM & Maths
 	- [Logiciels Stats](logiciels-stats.html)
 - CNAM
-	- [Classification et Modèles de mélange](slides/cnam-classif-modeles.html)
+	- Classification et Modèles de mélange
 
 D'autres ressources :
 

@@ -1,6 +1,10 @@
 ---
 title: Interrogation de données
 author: Concepts
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Plan 
@@ -491,7 +495,7 @@ run;
 
 Interrogation de données avec :
 
-- [SQL](interrogation-sql.html)
+- [SQL](interrogation-sql-exemple.html)
 - [R](interrogation-r.html)
 - [SAS](interrogation-sas.html)
 - [MongoDB](interrogation-mongo.html)

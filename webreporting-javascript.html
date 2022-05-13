@@ -1,275 +1,183 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
+  <title>JavaScript</title>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>JavaScript</title>
-
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
 
 
 
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <base target="_blank">
 
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'JavaScript',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
 
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
 
+  <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <link href="site_libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="site_libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-deck.js"></script>
 
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
+  <style type="text/css">
 
+    b, strong {
+      font-weight: bold;
+    }
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
+    em {
+      font-style: italic;
+    }
 
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
+    summary {
+      display: list-item;
+    }
 
-  // mark it active
-  menuAnchor.tab('show');
+    details > summary > p:only-child {
+      display: inline;
+    }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
 
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            pre > code.sourceCode { white-space: pre; position: relative; }
+            pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+            pre > code.sourceCode > span:empty { height: 1.2em; }
+            .sourceCode { overflow: visible; }
+            code.sourceCode > span { color: inherit; text-decoration: inherit; }
+            div.sourceCode { margin: 1em 0; }
+            pre.sourceCode { margin: 0; }
+            @media screen {
+            div.sourceCode { overflow: auto; }
+            }
+            @media print {
+            pre > code.sourceCode { white-space: pre-wrap; }
+            pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+            }
+            pre.numberSource code
+              { counter-reset: source-line 0; }
+            pre.numberSource code > span
+              { position: relative; left: -4em; counter-increment: source-line; }
+            pre.numberSource code > span > a:first-child::before
+              { content: counter(source-line);
+                position: relative; left: -1em; text-align: right; vertical-align: baseline;
+                border: none; display: inline-block;
+                -webkit-touch-callout: none; -webkit-user-select: none;
+                -khtml-user-select: none; -moz-user-select: none;
+                -ms-user-select: none; user-select: none;
+                padding: 0 4px; width: 4em;
+                color: #aaaaaa;
+              }
+            pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+            div.sourceCode
+              {   }
+            @media screen {
+            pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+            }
+            code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+            code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+            code span.at { color: #7d9029; } /* Attribute */
+            code span.bn { color: #40a070; } /* BaseN */
+            code span.bu { } /* BuiltIn */
+            code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+            code span.ch { color: #4070a0; } /* Char */
+            code span.cn { color: #880000; } /* Constant */
+            code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+            code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+            code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+            code span.dt { color: #902000; } /* DataType */
+            code span.dv { color: #40a070; } /* DecVal */
+            code span.er { color: #ff0000; font-weight: bold; } /* Error */
+            code span.ex { } /* Extension */
+            code span.fl { color: #40a070; } /* Float */
+            code span.fu { color: #06287e; } /* Function */
+            code span.im { } /* Import */
+            code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+            code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+            code span.op { color: #666666; } /* Operator */
+            code span.ot { color: #007020; } /* Other */
+            code span.pp { color: #bc7a00; } /* Preprocessor */
+            code span.sc { color: #4070a0; } /* SpecialChar */
+            code span.ss { color: #bb6688; } /* SpecialString */
+            code span.st { color: #4070a0; } /* String */
+            code span.va { color: #19177c; } /* Variable */
+            code span.vs { color: #4070a0; } /* VerbatimString */
+            code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+        
+  </style>
 
 
 </head>
 
-<body>
+<body style="opacity: 0">
 
+<slides class="layout-widescreen">
 
-<div class="container-fluid main-container">
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
 
+<slide class=""><hgroup><h2>Introduction à la programmation web dynamique</h2></hgroup><article  id="introduction-à-la-programmation-web-dynamique" class="smaller ">
 
-
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">JavaScript</h1>
-
-</div>
-
-
-<div id="introduction-à-la-programmation-web-dynamique" class="section level2">
-<h2>Introduction à la programmation web dynamique</h2>
 <ul>
-<li><code>JavaScript</code> (ou <code>JS</code>) basé sur <a href="https://www.ecmascript.org/">ECMAScript</a></li>
+<li><code>JavaScript</code> (ou <code>JS</code>) basé sur <a href='https://www.ecmascript.org/' title=''>ECMAScript</a></li>
 <li>Script interprété côté client
+
 <ul>
-<li>Possibilité de l’interpréter côté serveur avec des outils comme <a href="https://nodejs.org">NodeJS</a></li>
+<li>Possibilité de l’interpréter côté serveur avec des outils comme <a href='https://nodejs.org' title=''>NodeJS</a></li>
 </ul></li>
 <li>Utilisé aussi dans des outils autres (<em>CouchDB</em>, <em>MongoDB</em>, …)</li>
 <li>Manipulation totale du <strong>DOM</strong></li>
@@ -278,116 +186,127 @@ $(document).ready(function () {
 <li>Quelques outils disponibles de validation du code</li>
 <li>Commentaires sur une ligne avec <code>//</code> et sur plusieurs lignes avec <code>/* */</code></li>
 </ul>
-</div>
-<div id="exécution-et-intégration" class="section level2">
-<h2>Exécution et intégration</h2>
+
+</article></slide><slide class=""><hgroup><h2>Exécution et intégration</h2></hgroup><article  id="exécution-et-intégration" class="smaller ">
+
 <p>Code exécutable directement dans la <strong>console</strong> <code>JS</code> présente dans tous les navigateurs</p>
+
 <ul>
 <li>Affichage de la console</li>
 <li>Ecriture de commandes <code>JS</code></li>
 <li>Très utile pour le débogage</li>
 </ul>
+
 <p>Deux possibilités d’intégration du script :</p>
+
 <ul>
 <li>dans une balise <code>&lt;script&gt;code JS&lt;/script&gt;</code></li>
-<li>dans un fichier texte appelé avec <code>&lt;script src = "code.js"&gt;&lt;/script&gt;</code></li>
+<li>dans un fichier texte appelé avec <code>&lt;script src = &quot;code.js&quot;&gt;&lt;/script&gt;</code></li>
 </ul>
-</div>
-<div id="typage-des-variables" class="section level2">
-<h2>Typage des variables</h2>
+
+</article></slide><slide class=""><hgroup><h2>Typage des variables</h2></hgroup><article  id="typage-des-variables" class="smaller ">
+
 <p>Typage faible :</p>
+
 <ul>
 <li>pas de déclaration de type lors de la création de la variable</li>
 <li>pas de déclaration de la variable nécessaire avant utilisation</li>
 <li>pas de vérification de type lors d’une affectation</li>
 <li><strong>ATTENTION</strong> donc</li>
 </ul>
-<pre class="js"><code>const pi = 3.14;    // pi sera en lecture seule par la suite
+
+<pre class = 'prettyprint lang-js'>const pi = 3.14;    // pi sera en lecture seule par la suite
 var a = 5, b = &quot;b&quot;; // globale ou locale en fonction du placement de var
 d = a;              // var implicite ici, d sera globale
 a = b;              // a devient une chaîne
 var z;              // utilisation de var possible à tout moment
-let temp;           // durée de vie = bloc en cours</code></pre>
-</div>
-<div id="type-des-variables" class="section level2 smaller">
-<h2 class="smaller">Type des variables</h2>
+let temp;           // durée de vie = bloc en cours</pre>
+
+</article></slide><slide class=""><hgroup><h2>Type des variables</h2></hgroup><article  id="type-des-variables" class="smaller smaller">
+
 <ul>
 <li>Déclarée mais sans valeur : <code>undefined</code></li>
 <li>Nul : <code>null</code></li>
 <li>Booléen :<code>true</code>|<code>false</code></li>
 <li>Numérique : pour les entiers et réels</li>
-<li>Chaîne de caractère : définie avec <code>"chaîne"</code> ou <code>'chaîne'</code></li>
+<li>Chaîne de caractère : définie avec <code>&quot;chaîne&quot;</code> ou <code>&#39;chaîne&#39;</code></li>
 <li>Tableau : sans contrainte de type (mélange possible)</li>
 <li>Objet : type complexe structuré composé lui-même de variables nommées sans contrainte de type (fonctions possibles)</li>
 </ul>
-<pre class="js"><code>var tab = [1, &quot;deux&quot;, true]; // tab[0] vaut 1
+
+<pre class = 'prettyprint lang-js'>var tab = [1, &quot;deux&quot;, true]; // tab[0] vaut 1
 var obj = {
     n: &quot;blablabla&quot;,     // on y accède avec obj.n
     p1: 12,             // idem pour les autres
     p2: 3.214325,
     t: [12, 23, 98]
-};</code></pre>
-</div>
-<div id="format-json" class="section level2">
-<h2>Format JSON</h2>
+};</pre>
+
+</article></slide><slide class=""><hgroup><h2>Format JSON</h2></hgroup><article  id="format-json" class="smaller ">
+
 <ul>
 <li><code>JSON</code> pour <strong>JavaScript Object Notation</strong></li>
 <li>Utilisé de plus en plus souvent pour le stockage de données et surtout par les API</li>
 <li>Basé sur les types précédemment citées</li>
 <li><code>GeoJSON</code> : format spécifique pour stocker les données géographiques (coordonnées et formes)</li>
 </ul>
+
 <p>Exemple</p>
+
 <ul>
 <li>Données fournies Open Street View pour la localisation de la Tour Eiffel :
+
 <ul>
-<li><a href="http://nominatim.openstreetmap.org/search?q=tour+eiffel+paris+france&amp;format=json">données</a> (à ouvrir dans une autre fenêtre)</li>
+<li><a href='http://nominatim.openstreetmap.org/search?q=tour+eiffel+paris+france&amp;format=json' title=''>données</a> (à ouvrir dans une autre fenêtre)</li>
 </ul></li>
 <li>Activer le plugin <code>JSONView</code> de votre navigateur (ou tout autre plugin permettant de visualiser correctement les données <code>JSON</code>)</li>
 </ul>
-</div>
-<div id="opérations" class="section level2">
-<h2>Opérations</h2>
-<div id="mathématiques" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Opérations</h2></hgroup><article  id="opérations" class="smaller ">
+
 <h3>Mathématiques</h3>
+
 <ul>
 <li>Opérateurs usuels : <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>()</code>, …</li>
 <li>Convertion automatique si nécessaire : attention aux mélanges entier/chaîne</li>
 </ul>
-</div>
-<div id="logiques" class="section level3">
+
 <h3>Logiques</h3>
+
 <ul>
 <li>Opérateurs usuels : <code>==</code>, <code>!=</code>, <code>&lt;</code>, <code>&lt;=</code>, <code>&gt;</code>, <code>&gt;=</code></li>
 <li>Opérateurs complémentaires : <code>===</code>, <code>!==</code>
+
 <ul>
 <li>Vérifie l’égalité parfaite (i.e. même type - cf convertion automatique)</li>
-<li><code>5 == "5"</code> renvoie <code>true</code></li>
-<li><code>5 === "5"</code> renvoie <code>false</code></li>
+<li><code>5 == &quot;5&quot;</code> renvoie <code>true</code></li>
+<li><code>5 === &quot;5&quot;</code> renvoie <code>false</code></li>
 </ul></li>
 </ul>
-</div>
-</div>
-<div id="traitement-conditionnel-if" class="section level2">
-<h2>Traitement conditionnel : <code>if</code></h2>
-<pre class="js"><code>if (condition) {
+
+</article></slide><slide class=""><hgroup><h2>Traitement conditionnel : <code>if</code></h2></hgroup><article  id="traitement-conditionnel-if" class="smaller ">
+
+<pre class = 'prettyprint lang-js'>if (condition) {
     ligne(s) de code;
-}</code></pre>
-<pre class="js"><code>if (condition) {
+}</pre>
+
+<pre class = 'prettyprint lang-js'>if (condition) {
     ligne(s) de code;
 } else {
     ligne(s) de code;
-}</code></pre>
-<pre class="js"><code>if (condition) {
+}</pre>
+
+<pre class = 'prettyprint lang-js'>if (condition) {
     ligne(s) de code;
 } else if {
     ligne(s) de code;
 } else {
     ligne(s) de code;
-}</code></pre>
-</div>
-<div id="traitement-conditionnel-switch" class="section level2">
-<h2>Traitement conditionnel : <code>switch</code></h2>
-<pre class="js"><code>switch (expression) {
+}</pre>
+
+</article></slide><slide class=""><hgroup><h2>Traitement conditionnel : <code>switch</code></h2></hgroup><article  id="traitement-conditionnel-switch" class="smaller ">
+
+<pre class = 'prettyprint lang-js'>switch (expression) {
     case valeurA:
         ligne(s) de code;
         break;              // optionnel
@@ -400,129 +319,107 @@ var obj = {
     ...
     default:                // comportement si pas de correspondance
         ligne(s) de code;
-}</code></pre>
-</div>
-<div id="traitement-itératif-for" class="section level2">
-<h2>Traitement itératif : <code>for</code></h2>
+}</pre>
+
+</article></slide><slide class=""><hgroup><h2>Traitement itératif : <code>for</code></h2></hgroup><article  id="traitement-itératif-for" class="smaller ">
+
 <p>Boucle classique</p>
-<pre class="js"><code>for (initialisation; condition; incrémentation) {
+
+<pre class = 'prettyprint lang-js'>for (initialisation; condition; incrémentation) {
     ligne(s) de code;
-}</code></pre>
+}</pre>
+
 <p>Boucle sur les éléments d’un objet</p>
-<pre class="js"><code>for (variable in objet) {
+
+<pre class = 'prettyprint lang-js'>for (variable in objet) {
     ligne(s) de code;
-}</code></pre>
+}</pre>
+
 <p>Boucle sur les éléments d’un tableau</p>
-<pre class="js"><code>for (variable of tableau) {
+
+<pre class = 'prettyprint lang-js'>for (variable of tableau) {
     ligne(s) de code;
-}</code></pre>
-</div>
-<div id="traitement-itératif-while" class="section level2">
-<h2>Traitement itératif : <code>while</code></h2>
-<div id="do-...-while" class="section level3">
+}</pre>
+
+</article></slide><slide class=""><hgroup><h2>Traitement itératif : <code>while</code></h2></hgroup><article  id="traitement-itératif-while" class="smaller ">
+
 <h3><code>do ... while</code></h3>
-<pre class="js"><code>do {
+
+<pre class = 'prettyprint lang-js'>do {
     ligne(s) de code;
-} while (condition);</code></pre>
-</div>
-<div id="while" class="section level3">
+} while (condition);</pre>
+
 <h3><code>while</code></h3>
-<pre class="js"><code>while (condition) {
+
+<pre class = 'prettyprint lang-js'>while (condition) {
     ligne(s) de code;
-}</code></pre>
-</div>
-</div>
-<div id="fonctions" class="section level2">
-<h2>Fonctions</h2>
-<pre class="js"><code>function nomFonction (paramètre(s)) {
+}</pre>
+
+</article></slide><slide class=""><hgroup><h2>Fonctions</h2></hgroup><article  id="fonctions" class="smaller ">
+
+<pre class = 'prettyprint lang-js'>function nomFonction (paramètre(s)) {
     ligne(s) de code;
     return valeur;          // optionnel
 }
-// appel classique</code></pre>
-<pre class="js"><code>var nomFonction = function (paramètre(s)) {
+// appel classique</pre>
+
+<pre class = 'prettyprint lang-js'>var nomFonction = function (paramètre(s)) {
     ligne(s) de code;
     return valeur;          // optionnel
 };
-// idem pour l&#39;appel</code></pre>
+// idem pour l&#39;appel</pre>
+
 <p>L’objet <code>arguments</code> contient les paramètres utilisés lors de l’appel de la fonction</p>
+
 <p>La plus utile, <code>console.log(chaîne)</code>, permet d’afficher du contenu dans la console du navigateur</p>
-</div>
-<div id="manipulation-du-dom" class="section level2 smaller">
-<h2 class="smaller">Manipulation du <strong>DOM</strong></h2>
+
+</article></slide><slide class=""><hgroup><h2>Manipulation du <strong>DOM</strong></h2></hgroup><article  id="manipulation-du-dom" class="smaller smaller">
+
 <p>Deux objets présents :</p>
+
 <ul>
 <li><code>document</code> : contient le <strong>DOM</strong> justement</li>
 <li><code>window</code> : contient tous les informations de la page (dont les variables et fonctions <code>JS</code>), ainsi que <code>document</code></li>
 </ul>
+
 <p>Quelques fonctions utiles de <code>document</code> ou des éléments du DOM :</p>
+
 <ul>
-<li><code>getElementById("nom")</code> renvoie un pointeur vers l’élément identifié par <code>"nom"</code></li>
-<li><code>getElementsByClassName("classe")</code> renvoie un tableau de pointeur vers les éléments de la classe donnée</li>
-<li><code>getElementsByTagName("balise")</code> idem mais pour les éléments de la balise</li>
-<li><code>createElement("balise")</code> créé un élément de type spécifié</li>
+<li><code>getElementById(&quot;nom&quot;)</code> renvoie un pointeur vers l’élément identifié par <code>&quot;nom&quot;</code></li>
+<li><code>getElementsByClassName(&quot;classe&quot;)</code> renvoie un tableau de pointeur vers les éléments de la classe donnée</li>
+<li><code>getElementsByTagName(&quot;balise&quot;)</code> idem mais pour les éléments de la balise</li>
+<li><code>createElement(&quot;balise&quot;)</code> créé un élément de type spécifié</li>
 <li><code>innerHTML</code> contient le contenu <code>HTML</code> de l’élément</li>
 <li><code>appendChild</code>, <code>removeChild</code>, <code>insertBefore</code> permet d’ajouter ou de supprimer des éléments du DOM</li>
 </ul>
-</div>
-<div id="exemple" class="section level2">
-<h2>Exemple</h2>
-<div id="résultat" class="section level3">
-<h3>Résultat</h3>
-<div id="exjs">
 
+</article></slide><slide class=""><hgroup><h2>Exemple</h2></hgroup><article  id="exemple" class="smaller ">
+
+<h3>Résultat</h3>
+
+<div id="exjs">
 </div>
+
 <script>
 var exjs = document.getElementById("exjs");
 exjs.innerHTML = "Remplissage d'un div en rouge";
 exjs.style.color = "red";
 </script>
-</div>
-<div id="code" class="section level3">
+
 <h3>Code</h3>
-<pre class="html"><code>&lt;div id=&quot;exjs&quot;&gt;
+
+<pre class = 'prettyprint lang-html'>&lt;div id=&quot;exjs&quot;&gt;
 &lt;/div&gt;
 &lt;script&gt;
     var exjs = document.getElementById(&quot;exjs&quot;);
     exjs.innerHTML = &quot;Remplissage d&#39;un div en rouge&quot;;
     exjs.style.color = &quot;red&quot;;
-&lt;/script&gt;</code></pre>
-</div>
-</div>
+&lt;/script&gt;</pre></article></slide>
 
 
+  <slide class="backdrop"></slide>
 
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
+</slides>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
@@ -531,6 +428,20 @@ $(document).ready(function () {
     script.type = "text/javascript";
     script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
   })();
 </script>
 

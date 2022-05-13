@@ -2,5 +2,9 @@
 title: "Supports de cours 2015-2016"
 ---
 
-[Enseignement](enseignement.html)
-[Supports](supports.html)
+Ce site a été reconstruit a posteriori et n'est pas pleinement opérationnel. 
+
+- [Enseignement](enseignement.html)
+- [Supports](supports.html)
+
+Généré avec la commande `render_site()` du package [`rmarkdown`](https://rmarkdown.rstudio.com/)

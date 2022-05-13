@@ -1,6 +1,10 @@
 ---
 title: Librairie D3.js
 author: Data-Driven Documents
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 

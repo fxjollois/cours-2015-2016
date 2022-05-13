@@ -1,6 +1,10 @@
 ---
 title: Prog Web
 author: HTML, CSS, SVG
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Introduction à la programmation web statique

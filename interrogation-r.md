@@ -1,7 +1,10 @@
 ---
 title: "Interrogation de données avec R"
 author: "... ou comment faire du SQL sans SQL dans R"
-output: ioslides_presentation
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Introduction

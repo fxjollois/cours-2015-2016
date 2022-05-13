@@ -1,6 +1,10 @@
 ---
 title: Informatique Décisionnelle
 author: Récapitulatif
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Démarche décisionnelle

@@ -1,5 +1,9 @@
 ---
 title: Statistiques exploratoires sous SAS
+output: 
+  ioslides_presentation:
+    widescreen: true
+    smaller: true
 ---
 
 ## Statistiques exploratoires

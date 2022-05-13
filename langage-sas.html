@@ -1,278 +1,125 @@
 <!DOCTYPE html>
-
 <html>
-
 <head>
+  <title>Langage SAS</title>
 
-<meta charset="utf-8" />
-<meta name="generator" content="pandoc" />
-<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
-
-
-
-
-<title>Langage SAS</title>
-
-<script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
-<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<link href="site_libs/bootstrap-3.3.5/css/journal.min.css" rel="stylesheet" />
-<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
-<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
-<style>h1 {font-size: 34px;}
-       h1.title {font-size: 38px;}
-       h2 {font-size: 30px;}
-       h3 {font-size: 24px;}
-       h4 {font-size: 18px;}
-       h5 {font-size: 16px;}
-       h6 {font-size: 12px;}
-       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
-       pre:not([class]) { background-color: white }</style>
-<script src="site_libs/navigation-1.1/tabsets.js"></script>
-<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
-<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
-
-<style type="text/css">
-  code{white-space: pre-wrap;}
-  span.smallcaps{font-variant: small-caps;}
-  span.underline{text-decoration: underline;}
-  div.column{display: inline-block; vertical-align: top; width: 50%;}
-  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
-  ul.task-list{list-style: none;}
-    </style>
-
-<style type="text/css">code{white-space: pre;}</style>
-<script type="text/javascript">
-if (window.hljs) {
-  hljs.configure({languages: []});
-  hljs.initHighlightingOnLoad();
-  if (document.readyState && document.readyState === "complete") {
-    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
-  }
-}
-</script>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="chrome=1">
+  <meta name="generator" content="pandoc" />
 
 
 
 
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="apple-mobile-web-app-capable" content="yes">
 
+  <base target="_blank">
 
+  <script type="text/javascript">
+    var SLIDE_CONFIG = {
+      // Slide settings
+      settings: {
+                title: 'Langage SAS',
+                        useBuilds: true,
+        usePrettify: true,
+        enableSlideAreas: true,
+        enableTouch: true,
+                      },
 
+      // Author information
+      presenters: [
+            ]
+    };
+  </script>
 
+  <script src="site_libs/header-attrs-2.13/header-attrs.js"></script>
+  <link href="site_libs/ioslides-13.5.1/fonts/fonts.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/default.css" rel="stylesheet" />
+  <link href="site_libs/ioslides-13.5.1/theme/css/phone.css" rel="stylesheet" />
+  <script src="site_libs/ioslides-13.5.1/js/modernizr.custom.45394.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/prettify.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-r.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/prettify/lang-yaml.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/hammer.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-controller.js"></script>
+  <script src="site_libs/ioslides-13.5.1/js/slide-deck.js"></script>
 
-<style type = "text/css">
-.main-container {
-  max-width: 940px;
-  margin-left: auto;
-  margin-right: auto;
-}
-img {
-  max-width:100%;
-}
-.tabbed-pane {
-  padding-top: 12px;
-}
-.html-widget {
-  margin-bottom: 20px;
-}
-button.code-folding-btn:focus {
-  outline: none;
-}
-summary {
-  display: list-item;
-}
-details > summary > p:only-child {
-  display: inline;
-}
-pre code {
-  padding: 0;
-}
-</style>
+  <style type="text/css">
 
+    b, strong {
+      font-weight: bold;
+    }
 
-<style type="text/css">
-.dropdown-submenu {
-  position: relative;
-}
-.dropdown-submenu>.dropdown-menu {
-  top: 0;
-  left: 100%;
-  margin-top: -6px;
-  margin-left: -1px;
-  border-radius: 0 6px 6px 6px;
-}
-.dropdown-submenu:hover>.dropdown-menu {
-  display: block;
-}
-.dropdown-submenu>a:after {
-  display: block;
-  content: " ";
-  float: right;
-  width: 0;
-  height: 0;
-  border-color: transparent;
-  border-style: solid;
-  border-width: 5px 0 5px 5px;
-  border-left-color: #cccccc;
-  margin-top: 5px;
-  margin-right: -10px;
-}
-.dropdown-submenu:hover>a:after {
-  border-left-color: #adb5bd;
-}
-.dropdown-submenu.pull-left {
-  float: none;
-}
-.dropdown-submenu.pull-left>.dropdown-menu {
-  left: -100%;
-  margin-left: 10px;
-  border-radius: 6px 0 6px 6px;
-}
-</style>
+    em {
+      font-style: italic;
+    }
 
-<script type="text/javascript">
-// manage active state of menu based on current page
-$(document).ready(function () {
-  // active menu anchor
-  href = window.location.pathname
-  href = href.substr(href.lastIndexOf('/') + 1)
-  if (href === "")
-    href = "index.html";
-  var menuAnchor = $('a[href="' + href + '"]');
+    summary {
+      display: list-item;
+    }
 
-  // mark it active
-  menuAnchor.tab('show');
+    details > summary > p:only-child {
+      display: inline;
+    }
 
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+    slides > slide {
+      -webkit-transition: all 0.4s ease-in-out;
+      -moz-transition: all 0.4s ease-in-out;
+      -o-transition: all 0.4s ease-in-out;
+      transition: all 0.4s ease-in-out;
+    }
 
-  // Navbar adjustments
-  var navHeight = $(".navbar").first().height() + 15;
-  var style = document.createElement('style');
-  var pt = "padding-top: " + navHeight + "px; ";
-  var mt = "margin-top: -" + navHeight + "px; ";
-  var css = "";
-  // offset scroll position for anchor links (for fixed navbar)
-  for (var i = 1; i <= 6; i++) {
-    css += ".section h" + i + "{ " + pt + mt + "}\n";
-  }
-  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
-  document.head.appendChild(style);
-});
-</script>
-
-<!-- tabsets -->
-
-<style type="text/css">
-.tabset-dropdown > .nav-tabs {
-  display: inline-table;
-  max-height: 500px;
-  min-height: 44px;
-  overflow-y: auto;
-  border: 1px solid #ddd;
-  border-radius: 4px;
-}
-
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
-  font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
-}
-
-.tabset-dropdown > .nav-tabs > li.active {
+    .auto-fadein {
+      -webkit-transition: opacity 0.6s ease-in;
+      -webkit-transition-delay: 0.4s;
+      -moz-transition: opacity 0.6s ease-in 0.4s;
+      -o-transition: opacity 0.6s ease-in 0.4s;
+      transition: opacity 0.6s ease-in 0.4s;
+      opacity: 0;
+    }
+/* https://github.com/ropensci/plotly/pull/524#issuecomment-468142578 */
+slide:not(.current) .plotly.html-widget{
   display: block;
 }
 
-.tabset-dropdown > .nav-tabs > li > a,
-.tabset-dropdown > .nav-tabs > li > a:focus,
-.tabset-dropdown > .nav-tabs > li > a:hover {
-  border: none;
-  display: inline-block;
-  border-radius: 4px;
-  background-color: transparent;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
-  display: block;
-  float: none;
-}
-
-.tabset-dropdown > .nav-tabs > li {
-  display: none;
-}
-</style>
-
-<!-- code folding -->
-
-
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+            
+  </style>
 
 
 </head>
 
-<body>
+<body style="opacity: 0">
 
+<slides class="layout-widescreen">
 
-<div class="container-fluid main-container">
+  <slide class="title-slide segue nobackground">
+        <!-- The content of this hgroup is replaced programmatically through the slide_config.json. -->
+    <hgroup class="auto-fadein">
+      <h1 data-config-title><!-- populated from slide_config.json --></h1>
+      
+      <p data-config-presenter><!-- populated from slide_config.json --></p>
+          </hgroup>
+  </slide>
 
+<slide class=""><hgroup><h2>Le logiciel</h2></hgroup><article  id="le-logiciel" class="smaller ">
 
+<p><a href='http://www.sas.com' title=''><strong>SAS</strong></a> :</p>
 
-
-<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
-  <div class="container">
-    <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-        <span class="icon-bar"></span>
-      </button>
-      <a class="navbar-brand" href="index.html">Supports de cours de FX Jollois</a>
-    </div>
-    <div id="navbar" class="navbar-collapse collapse">
-      <ul class="nav navbar-nav">
-        
-      </ul>
-      <ul class="nav navbar-nav navbar-right">
-        
-      </ul>
-    </div><!--/.nav-collapse -->
-  </div><!--/.container -->
-</div><!--/.navbar -->
-
-<div id="header">
-
-
-
-<h1 class="title toc-ignore">Langage SAS</h1>
-
-</div>
-
-
-<div id="le-logiciel" class="section level2">
-<h2>Le logiciel</h2>
-<p><a href="http://www.sas.com"><strong>SAS</strong></a> :</p>
 <ul>
 <li>acteur majeur sur le marché des logiciels de statistiques</li>
 <li>outil principal : <strong>SAS Base</strong> ou <strong>SAS Studio</strong> (en ligne)
+
 <ul>
 <li>langage propriétaire</li>
 <li>scripts à exécuter (tout ou partie au choix)</li>
 <li>3 parties importantes :
+
 <ul>
 <li>éditeur de texte</li>
 <li>journal d’exécution</li>
@@ -280,17 +127,19 @@ $(document).ready(function () {
 </ul></li>
 </ul></li>
 </ul>
-</div>
-<div id="concepts-importants---données" class="section level2">
-<h2>Concepts importants - Données</h2>
+
+</article></slide><slide class=""><hgroup><h2>Concepts importants - Données</h2></hgroup><article  id="concepts-importants---données" class="smaller ">
+
 <ul>
 <li>Table
+
 <ul>
 <li>ensemble de lignes décrites par des colonnes nommées (dites aussi variables)</li>
 <li>types de variable : numérique, alpha-numérique, date</li>
 <li>stockées dans des librairies</li>
 </ul></li>
 <li>Librairie
+
 <ul>
 <li>répertoire de stockage des tables</li>
 <li><code>work</code> : espace temporaire (vidé à la fin d’une session), utilisé par défaut</li>
@@ -298,33 +147,37 @@ $(document).ready(function () {
 <li>possibilité de créer sa propre librairie, en poitant le répertoire voulu pour le stockage (persistant)</li>
 </ul></li>
 </ul>
-<pre class="sas"><code>libname lib &#39;/chemin/vers/repertoire&#39;;</code></pre>
-</div>
-<div id="concepts-importants---langage" class="section level2">
-<h2>Concepts importants - Langage</h2>
+
+<pre class = 'prettyprint lang-sas'>libname lib &#39;/chemin/vers/repertoire&#39;;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Concepts importants - Langage</h2></hgroup><article  id="concepts-importants---langage" class="smaller ">
+
 <ul>
 <li>Etape <code>DATA</code>
+
 <ul>
 <li>définition, importation, modification des tables</li>
 <li>commandes exécutées pour chaque ligne de manière identique et séparée</li>
 <li>quelques commandes spécifiques pour travailler avec des infos de lignes précédentes</li>
 </ul></li>
 <li>Procédure (<code>PROC</code>)
+
 <ul>
 <li>manipulation sur des colonnes</li>
 <li>calculs statistiques, graphiques, …</li>
 <li>quelques procédures spécifiques de manipulation de tables</li>
 </ul></li>
 </ul>
-</div>
-<div id="importation-de-données" class="section level2">
-<h2>Importation de données</h2>
-<div id="etape-data---avec-insertion-directe-des-données" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Importation de données</h2></hgroup><article  id="importation-de-données" class="smaller ">
+
 <h3>Etape <code>DATA</code> - Avec insertion directe des données</h3>
+
 <ul>
 <li>table stockée dans la librairie <code>work</code> si non spécifiée</li>
 <li>indiquer <code>lib.tab</code> pour mettre la table dans la librairie <code>lib</code></li>
 <li>3 variables créées
+
 <ul>
 <li><code>X</code> numérique</li>
 <li><code>Y</code> numérique</li>
@@ -332,13 +185,12 @@ $(document).ready(function () {
 </ul></li>
 <li><code>label</code> : permet d’ajouter une description à une variable ou à une table</li>
 </ul>
-</div>
-</div>
-<div id="importation-de-données-1" class="section level2">
-<h2>Importation de données</h2>
-<div id="etape-data---avec-insertion-directe-des-données-1" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Importation de données</h2></hgroup><article  id="importation-de-données-1" class="smaller ">
+
 <h3>Etape <code>DATA</code> - Avec insertion directe des données</h3>
-<pre class="sas"><code>data tab (label= &quot;table exemple&quot;);
+
+<pre class = 'prettyprint lang-sas'>data tab (label= &quot;table exemple&quot;);
     input X Y Z$;
     label X = &quot;Variable X&quot;
           Y = &quot;Variable Y&quot;;
@@ -349,136 +201,145 @@ $(document).ready(function () {
 1  9 C
 3 13 B
 3  8 A
-run;</code></pre>
-</div>
-</div>
-<div id="importation-de-données-2" class="section level2">
-<h2>Importation de données</h2>
-<div id="etape-data---avec-importation" class="section level3">
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Importation de données</h2></hgroup><article  id="importation-de-données-2" class="smaller ">
+
 <h3>Etape <code>DATA</code> - Avec importation</h3>
+
 <ul>
 <li>données dans un fichier texte</li>
 <li>options usuels :
+
 <ul>
-<li>délimiteur (avec <code>dlm = ';'</code> par exemple)</li>
+<li>délimiteur (avec <code>dlm = &#39;;&#39;</code> par exemple)</li>
 <li>première observation à considérer (<code>firstobs =</code>)</li>
 <li>nombre d’observation (<code>n =</code>)</li>
 </ul></li>
 <li>variables
+
 <ul>
 <li>nombre et type à connaître</li>
 </ul></li>
 </ul>
-<pre class="sas"><code>data tab;
+
+<pre class = 'prettyprint lang-sas'>data tab;
     infile &#39;chemin/vers/fichier&#39; options;
     input variables;
-run;</code></pre>
-</div>
-</div>
-<div id="importation-de-données-3" class="section level2">
-<h2>Importation de données</h2>
-<div id="procédure-import" class="section level3">
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Importation de données</h2></hgroup><article  id="importation-de-données-3" class="smaller ">
+
 <h3>Procédure <code>IMPORT</code></h3>
+
 <ul>
 <li>données possibles : fichier texte, Excel, Access, …</li>
 <li>options usuelles :
+
 <ul>
 <li>type de données (avec <code>dbms=dlm</code> pour texte par exemple)</li>
 <li><code>replace</code> pour indiquer si on remplace la table si elle existe</li>
 </ul></li>
 <li>paramètres usuels :
+
 <ul>
-<li>si <code>dbms=dlm</code>, alors <code>delimiter=";"</code></li>
+<li>si <code>dbms=dlm</code>, alors <code>delimiter=&quot;;&quot;</code></li>
 <li>présence ou non des noms de variables (avec <code>getnames=yes</code> ou <code>no</code>)</li>
 </ul></li>
 </ul>
-<pre class="sas"><code>proc import datafile=&#39;/chemin/vers/fichier&#39; out=tab options;
+
+<pre class = 'prettyprint lang-sas'>proc import datafile=&#39;/chemin/vers/fichier&#39; out=tab options;
     paramètres;
-run;</code></pre>
-</div>
-</div>
-<div id="format-et-informat" class="section level2">
-<h2><code>FORMAT</code> et <code>INFORMAT</code></h2>
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>FORMAT</code> et <code>INFORMAT</code></h2></hgroup><article  id="format-et-informat" class="smaller ">
+
 <p>2 concepts complémentaires :</p>
+
 <ul>
 <li><code>INFORMAT</code> : indique comment transformer une valeur (souvent à l’importation) pour la mettre dans un format spécifique
+
 <ul>
 <li>impact fort dans les calculs car modification du stockage</li>
 <li>exemple : une variable sexe codée 1 ou 2 (numérique donc) transformée en caractère <code>H</code> ou <code>F</code></li>
 </ul></li>
 <li><code>FORMAT</code> : indique comment présenter une valeur stockée dans un type spécifique
+
 <ul>
 <li>pas d’impact dans les calculs car pas de modifications du stockage</li>
 <li>exemple : un nombre réel stocké très précisemment (sans limite de précision) pourra être affiché avec un arrondià 2 décimales</li>
 </ul></li>
 </ul>
-</div>
-<div id="informat" class="section level2">
-<h2><code>INFORMAT</code></h2>
-<div id="par-défaut" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2><code>INFORMAT</code></h2></hgroup><article  id="informat" class="smaller ">
+
 <h3>Par défaut</h3>
+
 <ul>
 <li><code>X</code> et <code>Y</code> implicitement au format numérique</li>
 <li><code>Z</code> alpha-numérique (informat spécifié <code>$</code>)</li>
 </ul>
-<pre class="sas"><code>data tab;
+
+<pre class = 'prettyprint lang-sas'>data tab;
     input X Y Z$;
     cards;
 1 12 A
 2 15 A
 3 13 B
 3  8 ABCDEFGHIJ
-run;</code></pre>
+run;</pre>
+
 <p>Par défaut, la taille d’une chaîne alpha-numérique est de 8. Ici, la dernière valeur de <code>Z</code> sera donc <code>ABCDEFGH</code>.</p>
-</div>
-</div>
-<div id="informat-1" class="section level2">
-<h2><code>INFORMAT</code></h2>
-<div id="spécification-dans-input" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2><code>INFORMAT</code></h2></hgroup><article  id="informat-1" class="smaller ">
+
 <h3>Spécification dans <code>input</code></h3>
+
 <ul>
 <li>idem pour <code>X</code> et <code>Y</code></li>
 <li>On spécifie que la variable <code>Z</code> a 10 caractères maximum possibles</li>
 </ul>
-<pre class="sas"><code>data tab;
+
+<pre class = 'prettyprint lang-sas'>data tab;
     input X Y Z $10.;
     cards;
 1 12 A
 2 15 A
 3 13 B
 3  8 ABCDEFGHIJ
-run;</code></pre>
-</div>
-</div>
-<div id="informat-2" class="section level2">
-<h2><code>INFORMAT</code></h2>
-<div id="spécification-dans-input-1" class="section level3">
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>INFORMAT</code></h2></hgroup><article  id="informat-2" class="smaller ">
+
 <h3>Spécification dans <code>input</code></h3>
+
 <p>Avec indication de la position de début de lecture de la variable</p>
+
 <ul>
 <li><code>X</code> : débute au début de la ligne (<code>@1</code>) et caractère de taille 1 (<code>$1.</code>)</li>
 <li><code>Y</code> : débute à la position 3 (<code>@3</code>) et numérique (<code>2.</code> qui devient <code>8.</code> automatiquement)</li>
 <li><code>Z</code> : débute à la position 6 (<code>@6</code>) et chaîne de taille 10 (<code>$10.</code>)</li>
 </ul>
-<pre class="sas"><code>data tab;
+
+<pre class = 'prettyprint lang-sas'>data tab;
     input @1 X $1. @3 Y 2. @6 Z $10.;
     cards;
 1 12 A
 2 15 A
 3 13 B
 3  8 ABCDEFGHIJ
-run;</code></pre>
-</div>
-</div>
-<div id="informat-3" class="section level2">
-<h2><code>INFORMAT</code></h2>
-<div id="spécification-dans-informat" class="section level3">
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>INFORMAT</code></h2></hgroup><article  id="informat-3" class="smaller ">
+
 <h3>Spécification dans <code>informat</code></h3>
+
 <ul>
 <li>idem que précédemment, sans nécessité de spécifier la position de départ</li>
 <li>pratique dans beaucoup de cas avec des informats spécifiques</li>
 </ul>
-<pre class="sas"><code>data tab;
+
+<pre class = 'prettyprint lang-sas'>data tab;
     informat X $1. Y 2. Z $10.;
     input X Y Z $;
     cards;
@@ -486,18 +347,18 @@ run;</code></pre>
 2 15 A
 3 13 B
 3  8 ABCDEFGHIJ
-run;</code></pre>
-</div>
-</div>
-<div id="format" class="section level2">
-<h2><code>FORMAT</code></h2>
-<div id="spécification-dans-format" class="section level3">
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2><code>FORMAT</code></h2></hgroup><article  id="format" class="smaller ">
+
 <h3>Spécification dans <code>format</code></h3>
+
 <ul>
 <li>Limitation de <code>Z</code> à 5 caractères pour l’affichage (<code>format Z $5.</code>)</li>
 <li>Pas de modification du stockage (cf <code>ZZ</code> qui contient bien toute la dernière chaîne)</li>
 </ul>
-<pre class="sas"><code>data tab;
+
+<pre class = 'prettyprint lang-sas'>data tab;
     informat X $1. Y 2. Z $10.;
     format Z $5.;
     input X $ Y Z $;
@@ -507,13 +368,13 @@ run;</code></pre>
 2 15 A
 3 13 B
 3  8 ABCDEFGHIJ
-run;</code></pre>
-</div>
-</div>
-<div id="procédure-format" class="section level2">
-<h2>Procédure <code>FORMAT</code></h2>
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Procédure <code>FORMAT</code></h2></hgroup><article  id="procédure-format" class="smaller ">
+
 <p>Permet de définir des informats (avec <code>invalue</code>) ou des formats (avec <code>value</code>) spécifiques</p>
-<pre class="sas"><code>proc format;
+
+<pre class = 'prettyprint lang-sas'>proc format;
     value $typeX 
         &#39;1&#39; = &#39;Valeur A&#39;
         &#39;2&#39; = &#39;Valeur B&#39;
@@ -521,81 +382,80 @@ run;</code></pre>
 run;
 proc print data = tab;
     format X $typeX.;
-run;</code></pre>
+run;</pre>
+
 <p>Un autre moyen d’utiliser les formats est de le faire localement dans une procédure <code>PRINT</code> comme ci-dessus. Le format ne sera utilisé que pour l’affichage lors de l’exécution de cette procédure.</p>
-</div>
-<div id="procédure-format-1" class="section level2">
-<h2>Procédure <code>FORMAT</code></h2>
-<div id="résultat" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Procédure <code>FORMAT</code></h2></hgroup><article  id="procédure-format-1" class="smaller ">
+
 <h3>Résultat :</h3>
-<table>
-<thead>
+
+<table class = 'rmdtable'>
 <tr class="header">
-<th>Obs.</th>
-<th>X</th>
-<th>Y</th>
-<th>Z</th>
-<th>ZZ</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td>1</td>
-<td>Valeur A</td>
-<td>12</td>
-<td>A</td>
-<td>A</td>
-</tr>
-<tr class="even">
-<td>2</td>
-<td>Valeur B</td>
-<td>15</td>
-<td>A</td>
-<td>A</td>
+<th align="left">Obs.</th>
+<th align="left">X</th>
+<th align="left">Y</th>
+<th align="left">Z</th>
+<th align="left">ZZ</th>
 </tr>
 <tr class="odd">
-<td>3</td>
-<td>Autre</td>
-<td>13</td>
-<td>B</td>
-<td>B</td>
+<td align="left">1</td>
+<td align="left">Valeur A</td>
+<td align="left">12</td>
+<td align="left">A</td>
+<td align="left">A</td>
 </tr>
 <tr class="even">
-<td>4</td>
-<td>Autre</td>
-<td>8</td>
-<td>ABCDE</td>
-<td>ABCDEFGHIJ</td>
+<td align="left">2</td>
+<td align="left">Valeur B</td>
+<td align="left">15</td>
+<td align="left">A</td>
+<td align="left">A</td>
 </tr>
-</tbody>
+<tr class="odd">
+<td align="left">3</td>
+<td align="left">Autre</td>
+<td align="left">13</td>
+<td align="left">B</td>
+<td align="left">B</td>
+</tr>
+<tr class="even">
+<td align="left">4</td>
+<td align="left">Autre</td>
+<td align="left">8</td>
+<td align="left">ABCDE</td>
+<td align="left">ABCDEFGHIJ</td>
+</tr>
 </table>
-</div>
-</div>
-<div id="restitution-de-données" class="section level2">
-<h2>Restitution de données</h2>
-<div id="affichage-simple---procédure-print" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Restitution de données</h2></hgroup><article  id="restitution-de-données" class="smaller ">
+
 <h3>Affichage simple - procédure <code>PRINT</code></h3>
+
 <ul>
 <li>options usuelles :
+
 <ul>
 <li><code>noobs</code> pour ne pas afficher le numéro des lignes</li>
 <li><code>label</code> pour afficher le label des variables et non le nom</li>
 </ul></li>
 <li>paramètres usuels :
+
 <ul>
 <li><code>var</code> pour lister les variables à afficher</li>
 <li><code>by</code> pour faire un affichage pour chaque modalité d’une variable (ou plusieurs)</li>
 <li><code>sum</code> pour spécifier des variables à sommer (ajout d’une ligne de total)</li>
 </ul></li>
 </ul>
-<pre class="sas"><code>proc print data = tab options;
+
+<pre class = 'prettyprint lang-sas'>proc print data = tab options;
     paramètres;
-run;</code></pre>
-</div>
-</div>
-<div id="sélecteur-de-variables" class="section level2">
-<h2>Sélecteur de variables</h2>
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Sélecteur de variables</h2></hgroup><article  id="sélecteur-de-variables" class="smaller ">
+
 <p>Il existe des moyens de sélectionner plusieurs variables ensemble, sans les lister toutes :</p>
+
 <ul>
 <li><code>_ALL_</code> : sélecteur spécifique pour toutes les variables</li>
 <li><code>_NUMERIC_</code> : sélecteur spécifique pour les variables numériques</li>
@@ -603,25 +463,26 @@ run;</code></pre>
 <li><code>v1-vN</code> : sélecteur spécifique pour les variables nommées <code>v1</code>, <code>v2</code>, <code>v3</code>, …, <code>vN</code></li>
 <li><code>X--Z</code> : sélecteur spécifique pour les variables de <code>X</code> à <code>Z</code> dans la liste des variables de la table</li>
 </ul>
-</div>
-<div id="restitution-de-données-1" class="section level2">
-<h2>Restitution de données</h2>
-<div id="sauvegarde-dans-une-table-à-partir-dune-autre" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Restitution de données</h2></hgroup><article  id="restitution-de-données-1" class="smaller ">
+
 <h3>Sauvegarde dans une table à partir d’une autre</h3>
+
 <p>Pour récupérer les données d’une table pour les mettre dans une autre, qui sera créée (si existante alors détruite), on utilise une étape <code>DATA</code></p>
-<pre class="sas"><code>data tab_out;
+
+<pre class = 'prettyprint lang-sas'>data tab_out;
     set tab_in;
     opérations;
-run;</code></pre>
-</div>
-</div>
-<div id="quelques-éléments-de-langages" class="section level2">
-<h2>Quelques éléments de langages</h2>
-<div id="création-de-variables" class="section level3">
+run;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Quelques éléments de langages</h2></hgroup><article  id="quelques-éléments-de-langages" class="smaller ">
+
 <h3>Création de variables</h3>
+
 <ul>
 <li>Opérateurs usuels : <code>+</code>, <code>-</code>, <code>*</code>, <code>/</code>, <code>()</code></li>
 <li>Fonctions diverses :
+
 <ul>
 <li>chaînes</li>
 <li>dates</li>
@@ -629,59 +490,57 @@ run;</code></pre>
 </ul></li>
 <li><code>_N_</code> : numéro de la ligne courante</li>
 <li>Clause <code>WHERE</code> permettant de sélectionner seulement les lignes respectant une condition précise
+
 <ul>
 <li>utilisable aussi dans une procédure</li>
 </ul></li>
 </ul>
-</div>
-</div>
-<div id="quelques-éléments-de-langages-1" class="section level2">
-<h2>Quelques éléments de langages</h2>
-<div id="traitement-conditionnel---if" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Quelques éléments de langages</h2></hgroup><article  id="quelques-éléments-de-langages-1" class="smaller ">
+
 <h3>Traitement conditionnel - <code>if</code></h3>
-<div id="simple" class="section level4">
+
 <h4>Simple</h4>
-<pre class="sas"><code>if (condition) then opération;</code></pre>
-</div>
-<div id="complet" class="section level4">
+
+<pre class = 'prettyprint lang-sas'>if (condition) then opération;</pre>
+
 <h4>Complet</h4>
-<pre class="sas"><code>if (condition) then
+
+<pre class = 'prettyprint lang-sas'>if (condition) then
 do;
     opérations
 end;
 else
 do;
     opérations;
-end;</code></pre>
-</div>
-</div>
-</div>
-<div id="quelques-éléments-de-langages-2" class="section level2">
-<h2>Quelques éléments de langages</h2>
-<div id="données-manquantes" class="section level3">
+end;</pre>
+
+</article></slide><slide class=""><hgroup><h2>Quelques éléments de langages</h2></hgroup><article  id="quelques-éléments-de-langages-2" class="smaller ">
+
 <h3>Données manquantes</h3>
+
 <ul>
 <li>Numérique : <code>.</code></li>
-<li>Alpha-numérique : <code>""</code></li>
+<li>Alpha-numérique : <code>&quot;&quot;</code></li>
 </ul>
-</div>
-<div id="ecriture-ou-suppression-dans-une-étape-data" class="section level3">
+
 <h3>Ecriture ou suppression dans une étape <code>DATA</code></h3>
+
 <ul>
 <li><code>delete</code> permet de supprimer la ligne</li>
 <li><code>output</code> permet d’écrire la ligne dans la table résultat
+
 <ul>
 <li><code>output tab1</code> permet de spécifier la table de sortie</li>
 </ul></li>
 <li>à combiner avec une condition</li>
 </ul>
-</div>
-</div>
-<div id="quelques-éléments-de-langages-3" class="section level2">
-<h2>Quelques éléments de langages</h2>
-<div id="exemple" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Quelques éléments de langages</h2></hgroup><article  id="quelques-éléments-de-langages-3" class="smaller ">
+
 <h3>Exemple</h3>
-<pre class="sas"><code>data tabA tabB;
+
+<pre class = 'prettyprint lang-sas'>data tabA tabB;
     set tab;
     XY = X + Y;
     Z1 = substr(X, 1, 1);
@@ -691,77 +550,46 @@ end;</code></pre>
         output tabA;
     else
         output tabB;
-run; </code></pre>
-</div>
-</div>
-<div id="interrogation-de-données" class="section level2">
-<h2>Interrogation de données</h2>
+run; </pre>
+
+</article></slide><slide class=""><hgroup><h2>Interrogation de données</h2></hgroup><article  id="interrogation-de-données" class="smaller ">
+
 <p>cf slides</p>
+
 <ul>
-<li><a href="interrogation-concepts.html">Concepts pour l’interrogation de données</a></li>
-<li><a href="interrogation-sas.html">Interrogation de données sous SAS</a></li>
+<li><a href='interrogation-concepts.html' title=''>Concepts pour l’interrogation de données</a></li>
+<li><a href='interrogation-sas.html' title=''>Interrogation de données sous SAS</a></li>
 </ul>
-</div>
-<div id="manipulations-supplémentaires" class="section level2">
-<h2>Manipulations supplémentaires</h2>
-<div id="transposition-de-matrice" class="section level3">
+
+</article></slide><slide class=""><hgroup><h2>Manipulations supplémentaires</h2></hgroup><article  id="manipulations-supplémentaires" class="smaller ">
+
 <h3>Transposition de matrice</h3>
-<pre class="sas"><code>proc transpose data = tab;
-run;</code></pre>
-</div>
-<div id="autre" class="section level3">
+
+<pre class = 'prettyprint lang-sas'>proc transpose data = tab;
+run;</pre>
+
 <h3>Autre ?</h3>
-</div>
-</div>
-<div id="statistiques-descriptives" class="section level2">
-<h2>Statistiques descriptives</h2>
+
+</article></slide><slide class=""><hgroup><h2>Statistiques descriptives</h2></hgroup><article  id="statistiques-descriptives" class="smaller ">
+
 <p>cf slides</p>
+
 <ul>
-<li><a href="stats-desc-sas.html">Statistiques descriptives sous SAS</a></li>
+<li><a href='stats-desc-sas.html' title=''>Statistiques descriptives sous SAS</a></li>
 </ul>
-</div>
-<div id="statistiques-exploratoires" class="section level2">
-<h2>Statistiques exploratoires</h2>
+
+</article></slide><slide class=""><hgroup><h2>Statistiques exploratoires</h2></hgroup><article  id="statistiques-exploratoires" class="smaller ">
+
 <p>cf slides</p>
+
 <ul>
-<li><a href="stats-explo-sas.html">Statistiques exploratoires sous SAS</a></li>
-</ul>
-</div>
+<li><a href='stats-explo-sas.html' title=''>Statistiques exploratoires sous SAS</a></li>
+</ul></article></slide>
 
 
+  <slide class="backdrop"></slide>
 
-
-</div>
-
-<script>
-
-// add bootstrap table styles to pandoc tables
-function bootstrapStylePandocTables() {
-  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
-}
-$(document).ready(function () {
-  bootstrapStylePandocTables();
-});
-
-
-</script>
-
-<!-- tabsets -->
-
-<script>
-$(document).ready(function () {
-  window.buildTabsets("TOC");
-});
-
-$(document).ready(function () {
-  $('.tabset-dropdown > .nav-tabs > li').click(function () {
-    $(this).parent().toggleClass('nav-tabs-open');
-  });
-});
-</script>
-
-<!-- code folding -->
-
+</slides>
 
 <!-- dynamically load mathjax for compatibility with self-contained -->
 <script>
@@ -770,6 +598,20 @@ $(document).ready(function () {
     script.type = "text/javascript";
     script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
     document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+<!-- map slide visiblity events into shiny -->
+<script>
+  (function() {
+    if (window.jQuery) {
+       window.jQuery(document).on('slideleave', function(e) {
+         window.jQuery(e.target).trigger('hidden');
+      });
+       window.jQuery(document).on('slideenter', function(e) {
+         window.jQuery(e.target).trigger('shown');
+      });
+    }
   })();
 </script>
 
